@@ -52,8 +52,8 @@ If you enable clustering mode by configuring the system.conf (See link) and inst
 Each controller can serve nGrinder web content equally but handles the different test set depending the region. We don't provide any session clustering by default. So you may suffer login problem because sessions stored in a controller are not replicated to the other controllers. You may need to configure this by referring Tomcat Session Clustering Guide or use the sticky session on L4. If you are not a expert on this, Just let users to connect only one controller. It's the easiest. :-)
 
 How to configure the clustering?
-- Check Easy Clustering Guide
-- Check Advanced Clustering Guide
+- Check [Easy Clustering Guide](https://github.com/naver/ngrinder/wiki/easy-clustering-guide)
+- Check [Advanced Clustering Guide](https://github.com/naver/ngrinder/wiki/advanced-clustering-guide)
 
 # Technology Stack
 ## Client Tier
