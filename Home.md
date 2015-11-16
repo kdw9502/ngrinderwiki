@@ -10,4 +10,4 @@ nGrinder is being developed by Naver Business Platform and NHN China together.
 - [Screen Shot](https://github.com/naver/ngrinder/wiki/Screen-Shot)
 - Guide 
 - Dev Document
-- Frequently Asked Question
+- [Frequently Asked Question](https://github.com/naver/ngrinder/wiki/Frequently-Asked-Question)
