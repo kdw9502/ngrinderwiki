@@ -174,7 +174,7 @@ root         soft    nofile          16000
 
 root         hard    nofile          16000
 ```
->By default, the only one agent per machine is supported. However if you want to run multiple agents in a single machine, you have to configure some agent option. Please refer Agent Configuration Guide.
+>By default, the only one agent per machine is supported. However if you want to run multiple agents in a single machine, you have to configure some agent option. Please refer [Agent Configuration Guide](https://github.com/naver/ngrinder/wiki/agent-configuration-guide).
 
 ### Install Monitor
 nGrinder Monitor is the subset of the agent package and is installed into target machine to collect system statistics(such as CPU, MEM and Network) under the loads.  
@@ -202,4 +202,4 @@ stop_monitor.sh # for linux / mac
 stop_monitor.bat –o # for windows
 ```
 
-OK. Now you're ready to run the first performance test. Go to Quick Start
+OK. Now you're ready to run the first performance test. Go to [Quick Start](https://github.com/naver/ngrinder/wiki/quick-start)
