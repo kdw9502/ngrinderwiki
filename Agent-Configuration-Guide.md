@@ -63,8 +63,7 @@ nGrinder agent’s run_agent.sh commands takes several parameters to override th
 
 |Name|Example|overriden properties|description|
 |----|-------|--------------------|-----------|
-|-o, --overwrite-config|-o|-|Provide this If you want to overwrite the existing ${NGRINDER_AGENT_HOME}/agent.conf with current __agent.conf in the binary directory.  
-This is the useful when you like to the existing agent to connect to the other controller.|
+|-o, --overwrite-config|-o|-|Provide this If you want to overwrite the existing ${NGRINDER_AGENT_HOME}/agent.conf with current __agent.conf in the binary directory. This is the useful when you like to the existing agent to connect to the other controller.|
 |-ah / –agent-home|-ah ~/.ngrinder-agent1|ngrinder.agent.home|agent home path. By default it’s the ~/.ngrinder_agent|
 |-ch / --controller-host|-ch 10.10.10.10|agent.controller_host|the controller host name or IP to which this agent is connect.  If it’s not specified, ${NGRINDER_AGENT_ HOME}/agent.conf’s agent.controller_host value is used.|
 |-cp / --controller-port|-cp 10023|agent.controller_port|the controller port number.  If it’s not specified, ${NGRINDER_AGENT_ HOME}/agent.conf’s agent.controller_port value is used.|
