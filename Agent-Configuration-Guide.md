@@ -22,7 +22,7 @@ If you don’t like to composite URL, just copy the link in the browser and past
 
 The The pre-setup configuration are stored as ./__agent.conf file in the agent package. When the agent starts up, this __agent.conf file will be copied into the ${NGRINDER_AGENT_HOME}/agent.conf if this file does not exists. If there is already ${NGRINDER_AGENT_HOME}/agent.conf, agent will only show the warning message and skip the copy action. Then it will be executed with the preivous agent.conf.
 
-If you like to always overwirte the existing agent.conf with __agent.conf, you should run an agent with –o option which forces to overwrite the agent.conf. See agent's [Command Line Options](https://github.com/naver/ngrinder/wiki/Agent-Configuration-Guide#command-line-options)
+If you like to always overwirte the existing agent.conf with __agent.conf, you should run an agent with –o option which forces to overwrite the agent.conf. See agent's [Command Line Options](#command-line-options)
 
 ### Agent Start / Stop
 
