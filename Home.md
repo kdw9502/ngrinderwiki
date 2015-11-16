@@ -7,7 +7,7 @@ This is the tool developed by the service provider who really runs frequent load
 nGrinder is being developed by Naver Business Platform and NHN China together.
 
 - [Architecture](https://github.com/naver/ngrinder/wiki/Architecture)
-- Screen Shot
+- [Screen Shot](https://github.com/naver/ngrinder/wiki/Screen-Shot)
 - Guide 
 - Dev Document
 - Frequently Asked Question
