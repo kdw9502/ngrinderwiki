@@ -75,7 +75,7 @@ java -XX:MaxPermSize=200m -jar  ngrinder-controller-X.X.war -cm advanced
 ```
 Advanced cluster mode does not have any options. It just activates the cluster mode then get the cluster configuration from ${NGRINDER_HOME}/system.conf or ${NGRINDER_EX_HOME}/system.conf files.
 
-See [cluster realted configurations](Controller-Configuration-Guide#cluster_related_configurations) and [controller extended configurations](Controller-Configuration-Guide#controller_extended_configurations).
+See [cluster realted configurations](Controller-Configuration-Guide#cluster-related-configurations) and [controller extended configurations](Controller-Configuration-Guide#ngrinder_ex_homesystemconf).
 
 ### Configurations
 When a controller starts up, it copied default configurations into the ${NGRINDER_HOME}. You can modify them to set up the controller.
