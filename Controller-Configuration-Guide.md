@@ -6,6 +6,7 @@ This chapter describes the advanced nGrinder controller configuration. You may n
 When nGrinder Controller starts, nGrinder will create ${user.home}/.ngrinder directory into user’s home directory. this directory contains the default configuration files and data. The following is .ngrinder folder's default location.
 - Window   : C:\Users\${user.home}\.ngrinder
 - Unix/Linux :${user.home}/.ngrinder
+
 But if you like to assign the other directory for the home directory, please set Environment Variables ${NGRINDER_HOME}  before running ngrinder or you can provide "--ngrinder-home HOME_PATH" in the command line.
 
 ```
@@ -20,6 +21,7 @@ ${NGRINDER_EX_HOME} is used to specialize each controller in the cluster mode. B
 Not like ${NGRINDER_HOME}, ${NGRINDER_EX_HOME} is not automatically created when nGrinder starts up.
 - Window   : C:\Users\${user.home}\.ngrinder_ex
 - Unix/Linux :${user.home}/.ngrinder_ex
+
 ${NGRINDER_EX_HOME} is not the subject to be shared by multiple controllers. Each controller can have its own extended home. A user can define additional system configuration in the ${NGRINDER_EX_HOME}/ system.conf.  
 Controller will load the system configuration from ${NGRINDER_HOME}/ system.conf first, Then, it will try to load the system configuration from ${NGRINDER_EX_HOME}/ system.conf and override it to sytem configuration from ${NGRINDER_HOME}/ system.conf  
 For example, cluster.region configuration for each cluster member can be set in ${NGRINDER_EX_HOME}/system.conf file.  
