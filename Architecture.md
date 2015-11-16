@@ -65,17 +65,20 @@ How to configure the clustering?
 - **Select2** : Select2 is jQuery based replacement for select boxes which supports searching and infinite scrolling of results.
 - **JqPlot** :  jqPlot could generate pure client-side JS charts in web pages and therefore all nGrinder data chart are implemented with JqPlot.
 - **CodeMirror** :CodeMirror is an excellent code editor with syntax highlighting in the browser.We use it in nGrinder Script Editor.
+
 ## Controller Tier
 - **FreeMarker** :FreeMarker is a Java-based template engine focusing on MVC framework and nGrinder web pages is used it as a template engine.
 - **Spring Security** :  Spring Security is not only a powerful and highly configurable authentication and access-control framework, but also one of the most mature and widely used security framework. Therefore it protects nGrinder from illegal access.
 - **Spring MVC** : Spring MVC provides rich functionality for building robust web applications. nGrinder uses wonderfully its annotation based configuration.
 - **GSon** :Gson is a Java library that can be used to convert Java Objects into its JSON representation, and vice versa.
 - **SVNKit Dav** : We use this for serving the underlying SVN content thought web.
+
 ##Service Tier
 - **The Grinder** : Grinder is a java load Testing framework which nGrinder mainly use. Without Grinder, no nGrinder exists
 - **Atlassian Plugin Framework** :We use this framework to make the plugin development easier. It's not so heavy weighted and easy to use!
 - **Spring**  : Spring Framework provides a comprehensive programming and configuration model for J2ee applications and nGrinder use as a its base architecture. At the first time, we thought Spring is too heavy to adopt. However we choose this because it's the most commonly used framework in our company(Naver) and it was easier to get the help from colleagues. Eventually we're convinced that we can not make nGrinder's rich functionality without highly configurable architecture Spring provides.
 - **EhCache** : Ehcache has excellent Spring integration. nGrinder uses this to speed up the data retrieval and to synchronize data between controllers in cluster mode.
+
 ## Data Tier
 - **Spring Data** :Spring Data simplifies the development of JPA-based data access layer. nGrinder uses RDBMS but this enables the RDBMS access without a single line of SQL.
 Hibernate : Hibernate is a powerful technology for persisting data,and it is Spring Data back-end within nGrinder.
