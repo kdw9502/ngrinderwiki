@@ -69,8 +69,8 @@ an successfully in 8ms
 4. Open the browser and go to http://localhost:8080/ngrinder-controller-X.X or http://localhost:8080 if you changed the war file name to ROOT.war
 
 ### More
-1. nGrinder supports multiple regions(runnging separate sets of agents belong to the multiple network zone) by clustering multiple controllers. See [Controller Clustering Guide](blank).
-2. There are many configurable options which make nGrinder customized for each needs. See [Controller Configuration Guide](blank).
+1. nGrinder supports multiple regions(runnging separate sets of agents belong to the multiple network zone) by clustering multiple controllers. See [Controller Clustering Guide](https://github.com/naver/ngrinder/wiki/controller-clustering-guide).
+2. There are many configurable options which make nGrinder customized for each needs. See [Controller Configuration Guide](https://github.com/naver/ngrinder/wiki/controller-configuration-guide).
 
 ### Install Agents
 Not like previous nGrinder, nGrinder 3.3 agents is downloaded from the controller. The downloaded agent package already contains the default agent configuration connecting to the controller from which the agent is downloaded. 
