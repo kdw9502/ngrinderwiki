@@ -6,6 +6,6 @@ Nothing is really necessary to upgrade controller. Just replace ngrinder-control
 
 ### How to upgrade agent
 
-From nGrinder 3.3 agent, the agent auto upgrade by controller command is supported.  See [Agent Auto Update](https://github.com/naver/ngrinder/wiki/Upgrade-guide)
+From nGrinder 3.3 agent, the agent auto upgrade by controller command is supported.  See [Agent Auto Update](https://github.com/naver/ngrinder/wiki/agent-auto-update)
 If you're running nGrinder agent in prior to 3.3 version,  If you'd like to upgrade the agent, just replace the current agent binary with the newer version. And run run_agent.sh or run_agent.bat.
 That's it.
