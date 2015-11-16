@@ -15,7 +15,7 @@ java -jar -XX:MaxPermSize=200m -jar ngrinder-controller-X.X.war -p 8081 -cm easy
 
 java -jar -XX:MaxPermSize=200m -jar ngrinder-controller-X.X.war -p 8082 -cm easy -clp 10012 -r region3 -cp 9003       
 ```
-   - For the CLI options, see Controller Configuration Guide
+   - For the CLI options, see [Controller Configuration Guide](controller-configuration-guide)
 2. Visit one of the web port and login
     - http://localhost:8080/
 3. And check the region is activated and all regions are up.  
