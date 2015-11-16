@@ -224,13 +224,7 @@ In ${NGRINDER_HOME}, there are some folders to store data used in nGrinder. Foll
 |Folder Name|Description|
 |-----------|-----------|
 |logs|This store the nGrinder logs. nGrinder intercepts the tomcat log and saves the log in ngrinder.log file. This log contains only controller related logs. You can also monitor the content of this file through the admin menu.|
-|perftest|This folder stores the each performance test related data.
-- perftest/{test_id_range}/{test_id}/dist
-    - contains the files to be distributed.
-- perftest/{test_id_range}/{test_id}/logs
-    - contains the logs from agents.
-- perftest/{test_id_range}/{testid}/report
-    - contains the statistics for the test.|
+|perftest|This folder stores the each performance test related data.<ul><li>perftest/{test_id_range}/{test_id}/dist<ul><li>contains the files to be distributed.</li></ul></li><li>perftest/{test_id_range}/{test_id}/logs<ul><li>contains the logs from agents.</li></ul></li><li>perftest/{test_id_range}/{testid}/report<ul><li>contains the statistics for the test.</li></ul></li>|
 |download|This folder contains the downloadable files like agent and monitor. For example, if you like to re-create the agent and monitor package, you can delete out the all contents in this folder.|
 |plugins|This folder contains plugins. If you like to install new plugins(~~.jar) or upgrade existing plugins, just drop them into into this folder. They will be automatically scanned and activated.|
 |repos|This folder contains the each user's svn repository.|
