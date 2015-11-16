@@ -3,7 +3,7 @@ This chapter describes the advanced nGrinder agent configuration for nGrinder 3.
 ### Agent Download from Controller
 from nGrinder 3.3, the agent packages are not distibuted from sourceforge. But it can be downloaded from the controller. This made big changes in agent configurations. The controller already knows how agents should be configured, it provides the agent package containning the appropriate configuration. For example when the admin user downloads an agent, the agent package contain the generic configurations. However if the general user downloads the package, the package will contain [private agent](https://github.com/naver/ngrinder/wiki/private-agent) configuration.
 
-See [Installation Guide](https://github.com/naver/ngrinder/wiki/installation-guide) to how to download the agent in the web browser.
+See [Installation Guide](installation-guide) to how to download the agent in the web browser.
 
 If you prefer to download agents using wget, you can use following URLs directly as well.
 
