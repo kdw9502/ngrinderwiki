@@ -14,6 +14,7 @@ These APIs are protected by by HTTP Basic Auth. Therefore you should provide the
 
 ### Clone the existing perf test and start
 Before you invoke this API, There should be the existing test which was already successfully executed. You can clone and start this test using the following URL.
+
 1. http://host_name/perftest/api/{test_id_to_be_cloned}/cloneAndStart (ngrinder 3.2.3)
 2. http://host_name/perftest/api/{test_id_to_be_cloned}/clone_and_start (ngrinder 3.3~)
 
@@ -139,4 +140,4 @@ Above call will show the last 3 perf tests which exists in the ngrinder. This wi
 curl –u admin:admin –s http://host_name/perftest/api?size=10 | jq “.[4].agentCount”
 ```
 
-See [Rest API](rest-api)
+See [Rest API](REST-API)
