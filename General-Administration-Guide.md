@@ -15,6 +15,7 @@ Each has name that reflects its role.
 - Initial password is the same as name
 
 There are 4 user types (referred to as Roles)
+
 |Role|Description|
 |----|-----------|
 |ADMIN|Manage nGrinder system including : User Management, Test Observation, Test Report Statistics and Agent Management, etc.|
