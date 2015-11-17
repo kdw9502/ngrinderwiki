@@ -10,7 +10,7 @@ IntelliJ is the quite good match to nGrinder Groovy Maven project because it alr
 4. Select the Subversion as VCS and type the SVN url in which SVN maven project is stored. Then type ID / PW.
 5. Then check out.
 6. In the imported Project, select the “Add Framework Support”  
-   ![](image)
+   ![](http://www.cubrid.org/files/attach/images/379199/941/804/image_thumb_2.png)
 7. Select Groovy and Click OK.  
    ![](http://www.cubrid.org/files/attach/images/379199/941/804/image_thumb_3.png)
 8. You need to modify the pom.xml to make the test runnable in IDE. Open pom.xml and add followings.  
