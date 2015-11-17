@@ -35,7 +35,7 @@ If you are admin, the menu above should be visible. You can click the Agent Mana
 
 ![](http://www.cubrid.org/files/attach/images/379199/166/438/image_thumb_3.png)
 
-Then, you should see the screen shown above. This shows the statuses of the attached agent. If we just allow all agent connections, there would be a potential risk. For this reason, nGrinder only uses approved agents. If you confirm that the agents listed here are OK, you can approve them. Some agents can be only used for specific users. Please refer to [User Agent](user-agent) for details.
+Then, you should see the screen shown above. This shows the statuses of the attached agent. If we just allow all agent connections, there would be a potential risk. For this reason, nGrinder only uses approved agents. If you confirm that the agents listed here are OK, you can approve them. Some agents can be only used for specific users. Please refer to [User Agent](private-agent) for details.
 
 You can monitor agent performance status by clicking each IP.
 
