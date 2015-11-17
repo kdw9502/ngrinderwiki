@@ -89,5 +89,3 @@ Log monitoring is available in the not cluster mode.
 
 ### Test Policies
 Sometimes, you need to configure whole test execution policy. For example, you can set the maximum count of agents that each test can use. Or you can limit the max concurrent number of tests to minimize network loads. These kinds of policies can be configured by configuring the ${NGRINDER_HOME}/system.properties file.
-
-For further details, please refer [Advanced Controller Configuration](advanced-controller-configuration).
