@@ -12,5 +12,5 @@ This page contains nGrinder 3.0 related developer documents.
 - [How to create dynamic queries in SpringData](how-to-create-dynamic-queries-in-springdata)
 - [How to develop plugin](how-to-develop-plugin)
 - [nGrinder test execution performance test](ngrinder-test-execution-performance-test)
-- [Git Branching Policy](ngrinder-git-branching-policy)
+- [Git Branching Policy](nGrinder-git-branching,-version-policy)
 - [Contributors](contributors)
