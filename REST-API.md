@@ -1,6 +1,6 @@
 nGrinder 3.3 provides more than 40 REST APis. Initially they were developed to run nGrinder as infrastructure. Recently one of the our partners started to create the gaming cloud and they wanted to run nGrinder but using their own UI. nGrinder 3.3 REST APIs supports this scenario. Our REST API set allows the other system to control full range of nGrinder features including User Management, Agent Management, Script Management, Performance Test Management. and even System Configuration.
 
-You can see the [REST API/QuickStart](rest-apiquickstart) first to see the how it works generally.
+You can see the [REST API/QuickStart](REST-API-QuickStart) first to see the how it works generally.
 
 ### URL and Method
 nGrinder REST APIs are generally provided “/api” post fix of each available URLs. For example, the perf test related URL are started with http://hostname/perftest/, and the REST API URL for perf test starts with http://hostname/perftest/api/  
