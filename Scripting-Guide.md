@@ -35,7 +35,7 @@ More practical ways for the advanced nGrinder user are...
 - Do you want to make each thread act differently?
     - [How to make each thread act differently](how-to-make-each-thread-act-differently)
 - Do you need you test a socket.io app?
-    - [How to test a socket.io app](using-ngrinder-to-perform-load-test-for-a-socket-io-app)
+    - [How to test a socket.io app](Using-nGrinder-to-perform-load-test-for-a-socket.io-app)
     - [How to test a socket.io app - Python version](using-ngrinder-to-perform-load-test-for-socket-io-app-python-version)
 - Do you want to pass the parameter to the script to modify the behavior without script modification?
     - [How to pass a parameter to the script](how-to-pass-a-parameter-to-the-script)
