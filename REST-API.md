@@ -42,7 +42,3 @@ With GET method, you can provide page and size parameter so that the given numbe
 ### API Detailed Description
 You can find detailed description for the each APIs.
 - [REST API/PerfTest](REST-API-PerfTest)
-- [REST API/User](rest-apiuser)
-- [REST API/Script](rest-apiscript)
-- [REST API/Agent](rest-apiagent)
-- [REST API/ETC](rest-apietc)
