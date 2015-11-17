@@ -2,7 +2,7 @@ This page contains nGrinder 3.0 related developer documents.
 
 - [Vuser Test Result](vuser-test-result)
 - [Naming Convention](naming-convention)
-- [How to build nGrinder from the scratch using Maven](how-to-build-ngrinder-from-the-scratch-using-maven)
+- [How to build nGrinder from the scratch using Maven](How-To-Build-nGrinder-from-scratch-using-Maven)
 - [How to build nGrinder Recorder using Maven](how-to-build-ngrinder-recorder-using-maven)
 - [Java Implementation for Google Analytics Measurement Protocol](java-implementation-for-google-analytics-measurement-protocol)
 - [How to setup nGrinder Project in Eclipse](how-to-setup-ngrinder-project-in-eclipse)
