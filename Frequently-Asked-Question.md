@@ -18,4 +18,4 @@
 
 > nGrinder uses ${user.home}/.ngrinder folder to store and retrieve data. However if you install 32Bit JVM on 64bit JVM. ${user.home} returns ? then it does not work well. Please see http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6972329 . The solution is to install 64bit JVM on 64bit OS.
 
->Or... you may not have configured /etc/hosts well. Please check the Installation Guide again.
+>Or... you may not have configured /etc/hosts well. Please check the [Installation Guide](installation-guide) again.
