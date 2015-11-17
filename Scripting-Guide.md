@@ -20,7 +20,7 @@ More practical ways for the advanced nGrinder user are...
     - [How to use resources](how-to-use-resources)
 - Do you need to simulate the multiple user scenario in the different run weight?
     - [How to run the multiple tests with different weight](how-to-run-the-multiple-tests-with-different-weight)
-    - [How to run the multiple tests with different weight - Groovy Way](how-to-run-the-multiple-tests-with-different-weight-groovy-way)
+    - [How to run the multiple tests with different weight - Groovy Way](How-to-run-the-multiple-tests-with-different-weight---Groovy-way)
 - Do you need to adjust the logger level to only see the errors? Read followings.
     - [How to adjust logger level](how-to-adjust-logger-level)
 - Do you need to test DB performance? Doesn't nGrinder seems to support this? No.. You can still test it with nGrinder
