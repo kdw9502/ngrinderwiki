@@ -1,4 +1,4 @@
-> If you're using previous nGrinder 3.2.X version. See [Thread ramp up by script](how-to-ramp-up-by-threads#thread_ramp_up_by_script)
+> If you're using previous nGrinder 3.2.X version. See [Thread ramp up by script](How-to-ramp-up-by-threads#thread-ramp-up-by-script)
 
 ### Thread ramp up by perf test configuration
 In addition to the process ramp up which the underlying The Grinder engine provides, nGrinder 3.3 supports the thread ramp up. Because the process is the very expensive resource and about 10 is the maximum count of executable process in a single core machine. Because of it, the process ramp-up only supports very limited ramp-up (from 0 to 10) so far. From nGrinder 3.3, the thread ramp up can be enabled by the configuration. Because more than 100 threads can be executed per a process, this made very smooth ramp-up than process ramp-up.
