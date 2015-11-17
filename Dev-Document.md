@@ -7,7 +7,7 @@ This page contains nGrinder 3.0 related developer documents.
 - [How to setup nGrinder Project in Eclipse](How-To-Set-up-an-nGrinder-Project-In-Eclipse)
 - [Coding Convention](coding-convention)
 - [How to refer nGrinder Home](how-to-refer-ngrinder-home)
-- [Setup Mylyn task reposiroty for JIRA](setup-mylyn-task-reposiroty-for-jira)
+- [Setup Mylyn task reposiroty for JIRA](Setup-Mylyn-task-repository-for-JIRA)
 - [Spring in nGrinder](spring-in-ngrinder)
 - [How to create dynamic queries in SpringData](how-to-create-dynamic-queries-in-springdata)
 - [How to develop plugin](how-to-develop-plugin)
