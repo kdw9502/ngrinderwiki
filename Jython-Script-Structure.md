@@ -58,7 +58,7 @@ class TestRunner:
             grinder.statistics.forLastTest.success = 0
 ```
 
-The each process in the Grinder jython scriptengine reads the whole script and each thread executes the TestRunner’s __call__ method.  
+The each process in the Grinder jython scriptengine reads the whole script and each thread executes the TestRunner’s \_\_call\_\_ method.  
 This execution can be illustrated by the following figure.
 
 ![](http://www.cubrid.org/files/attach/images/379199/899/651/image_thumb_2.png)
@@ -80,8 +80,8 @@ test1.record(request1)
 ```
 
 In the above part, the test statistics are prepared and request1 object is instrumented to record any methods call on request1 object.  
-Then the multiple threads are created and each thread creates a TestRunner object by running the __init__ method.  
-__init__ method is subject to be invoked once per thread. Therefore, this method is the perfect place to login if your target system needs the login.
+Then the multiple threads are created and each thread creates a TestRunner object by running the \_\_init\_\_ method.  
+\_\_init\_\_ method is subject to be invoked once per thread. Therefore, this method is the perfect place to login if your target system needs the login.
 
 ```
 class TestRunner:
@@ -91,7 +91,7 @@ class TestRunner:
         pass
 ```
 
-After creating TestRunner object, each thread continuously invokes __call__() method on the created TestRunner object until the test is finished.
+After creating TestRunner object, each thread continuously invokes \_\_call\_\_() method on the created TestRunner object until the test is finished.
 
 ```
 # test method       
@@ -119,7 +119,7 @@ def __call__(self):
         grinder.statistics.forLastTest.success = 0
 ```
 
-When the agent gets the stop message from controller or specified run count is reached, each thread is terminated. Before thread terminations, thread invokes __del__(self) method to clean up the test. If you don’t provide this method in the test script, it’s just ignored.  
+When the agent gets the stop message from controller or specified run count is reached, each thread is terminated. Before thread terminations, thread invokes \_\_del\_\_(self) method to clean up the test. If you don’t provide this method in the test script, it’s just ignored.  
 When starting a test in the controller, not only script but also following folders which exists at the same folder as the script is located are transfered to the agents.
 
 ![](http://www.cubrid.org/files/attach/images/379199/899/651/image_thumb_1.png)
