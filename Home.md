@@ -14,5 +14,6 @@ nGrinder is being developed by Naver Business Platform and NHN China together.
     - [User Guide](https://github.com/naver/ngrinder/wiki/user-guide)
     - [Scripting Guide](https://github.com/naver/ngrinder/wiki/scripting-guide)
     - [Plugin Guide](https://github.com/naver/ngrinder/wiki/how-to-develop-plugin)
+- [Script Collection](https://github.com/naver/ngrinder/wiki/Script-Collection)
 - [Dev Document](https://github.com/naver/ngrinder/wiki/Dev-Document)
 - [Frequently Asked Question](https://github.com/naver/ngrinder/wiki/Frequently-Asked-Question)
