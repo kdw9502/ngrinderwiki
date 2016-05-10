@@ -1,6 +1,7 @@
 ### nGrinder Recorder Install Guide
 
 Follow below steps in Chrome browser:
+
 1. Download [nGrinder Recorder](ngrinder-recorder-1.0.crx)
 2. Move to the Extensions management page by this URL: chrome://extensions
 (other way : Chrome menu -> Tools -> Extensions)
