@@ -8,7 +8,7 @@ If you need to call the target server with a domain name which is not registered
 To make system the reliable and scalable , developers frequently use L4 in front of a number of servers so that clients access the L4 VIP (virtual IP) first and L4 distributes them into currently available back-end servers. L4 can be shared by multiple services so that L4 can distribute the requests to the different set of servers depending on where the requests come from.  
 However, L4 is the limited resource and has its own capacity. If the count of requests is over than it can handle, they will drop some packet or crash. It can cause the problem when a single L4 is shared by multiple services and run the performance test to one of the services. The load might make the other service's packets lost or L4 itself can be crashed. Which means performance testing on the L4 should be avoid.  
 We always recommend to write the script which connects to the servers directly not L4. If multiple servers should be accessed at a single test, this can be done by assign dynamic URL string in the script.
-```
+```groovy
 @RunWith(GrinderRunner)
 class TestRunner {
  
