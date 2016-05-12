@@ -5,7 +5,7 @@ However, It might result the problem when a user tries to find out the error cau
 For this case, you need to adjust log level to ERROR to focus on real error.
 
 ##### Jython
-```
+```python
 # -*- coding:utf-8 -*-
   
 # A simple example using the HTTP plugin that shows the retrieval of a
@@ -40,7 +40,7 @@ class TestRunner:
 ```
 
 ##### Groovy
-```
+```groovy
 import static net.grinder.script.Grinder.grinder
 import static org.junit.Assert.*
 import static org.hamcrest.Matchers.*
