@@ -1,5 +1,5 @@
 ##### HTTP POST Call
-```
+```groovy
 @Test
 public void test1(){
     request1.POST("http://www.google.com", [new NVPair("key1","value1"), new NVPair("key2":"value2")] as NVPair[])
@@ -8,7 +8,7 @@ public void test1(){
 
 OR
 
-```
+```groovy
 @Test
 public void test1(){
     request1.POST("http://www.google.com", nvs(["key1":"value1", "key2":"value2"]))
@@ -25,14 +25,14 @@ def nvs(def map) {
 ```
 
 ##### How to assert test result
-```
+```groovy
 def result = request1.GET("http://www.google.co.kr")
 assertThat(result.statusCode, is(200)) // result status code assetion
 assertThat(result.text, containsString("google")) // result text assertion
 ```
 
 ##### How to record the @Test method.. not HTTPRequest. This is very useful to define a transaction.
-```
+```groovy
 @RunWith(GrinderRunner)
 class TestRunner {
     static GTest test1
@@ -67,7 +67,7 @@ class TestRunner {
 ```
 
 ##### How to skip some initialization code for the each transaction.
-```
+```groovy
 @RunWith(GrinderRunner)
 class TestRunner {
     static GTest test1
@@ -103,7 +103,7 @@ class TestRunner {
 ```
 
 ##### How to provide 0.5% RunRate.
-```
+```groovy
 @RunWith(GrinderRunner)
 class TestRunner {
     static GTest test1
