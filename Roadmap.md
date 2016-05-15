@@ -1,12 +1,19 @@
-## 3.5 (30/Oct/15)
+## 3.6 (not decided yet)
+* Support bi-direction connection b/w controller and agent.
+* Support Gatling TC
+
+## 3.5 (30/Nov/15)
 * Support AWS / Mesos / Swarm for agent auto scaling to reduce the agent operation cost.
+* Enhance UI by adopting inspinia template
 
-## 3.4.1 (30/July/15)
-* Support OAuth2 
+## 3.4.2 (30/July/15)
+* Support MySQL as backend DB.
+* Provide test comparison feature.
+
+## 3.4.1 (30/June/15)
+* Support OAuth2 login by default.
   * Compatible with github / gitlab.
-
-## 3.4.1 (30/July/15)
-* Support OAuth2 
+* Support LDAP login by default.
   * Compatible with github / gitlab.
 
 ## 3.4   (20/May/15)
