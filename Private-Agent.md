@@ -2,11 +2,11 @@ A user might want to use more agents than are available. For example, there migh
 
 nGrinder solves this problem by providing user agents. If the specific user provides his own agents attached to a controller installed in his free machines, these agents are only used for that given user. So if the max agent is 5 and user provides 5 user specific agents, he or she is allowed to run 10 agents.
 
-If you're running over nGrinder 3.3 and log in as a not admin account, you will see the following link in the menu. 
+If you're running over nGrinder 3.3 and log in as a not admin account, you will see the following link in the menu.
 
-![](http://www.cubrid.org/files/attach/images/379199/885/088/001/image_thumb.png)
+![](assets/Private-Agent-9fe18.png)
 
-“HELLO” means here that it will download the private agent connecting to HELLO region. This will download the private agent for current user. 
+“HELLO” means here that it will download the private agent connecting to HELLO region. This will download the private agent for current user.
 
 This downloaded private agent already contains the configuration which the agent acts as private agent. Therefore all you need to do is just to run
 ```
@@ -15,9 +15,9 @@ run_agent.sh -o
 ```
 If you’re using nGrinder 3.2.X version, you need to set up the configuration by youself. The following describes how to set up the user own agents.
 
->
-1. Install nGrinder agent in the user`s own machine following [installation guide's](https://github.com/naver/ngrinder/wiki/installation-guide) "install agent" section.
-2. Open ~useraccount/.ngrinder-agent/agent.conf file  
+
+1. Install nGrinder agent in the user`s own machine following [[installation Guide]]) "install agent" section.
+1. Open ~useraccount/.ngrinder-agent/agent.conf file  
    - In stand alone mode, and set up the following.
        - agent.console.ip=controller ip
        - agent.console.port= controller port
@@ -26,7 +26,7 @@ If you’re using nGrinder 3.2.X version, you need to set up the configuration b
        - agent.console.ip=controller ip
        - agent.console.port= controller port
        - agent.region={controller region}_owned_{yourid}
-3. Run agents.
-4. Ask admin to approve these agents. These agents are not visible to users until the admin approves them .
+1. Run agents.
+1. Ask admin to approve these agents. These agents are not visible to users until the admin approves them
 
 Then run your agent. Finally you will have user own agents.

@@ -15,15 +15,15 @@ java -jar -XX:MaxPermSize=200m -jar ngrinder-controller-X.X.war -p 8081 -cm easy
 
 java -jar -XX:MaxPermSize=200m -jar ngrinder-controller-X.X.war -p 8082 -cm easy -clp 10012 -r region3 -cp 9003       
 ```
-   - For the CLI options, see [Controller Configuration Guide](controller-configuration-guide)
+   - For the CLI options, see [[Controller Configuration Guide]]
 2. Visit one of the web port and login
     - http://localhost:8080/
 3. And check the region is activated and all regions are up.  
-   ![](http://www.cubrid.org/files/attach/images/379199/673/088/001/image_thumb.png)
+   ![](assets/Easy-Clustering-Guide-2a7a5.png)
 
 ### Run Agents
 1. You can download and run the agent for each region. Just click the Download Agent > region Name like the above picture.  
    This will download the agent which is already configured to the region you specified.
 2. untar  the agent in the separate machine.
 3. Then run run_agent.sh -o or run_agent.bat -o
-4. If you want to run multiple agents in a single machine, see [Agent Configuration Guide](https://github.com/naver/ngrinder/wiki/agent-configuration-guide)
+4. If you want to run multiple agents in a single machine, see [[Agent Configuration Guide]]

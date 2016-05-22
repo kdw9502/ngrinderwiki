@@ -2,9 +2,9 @@ nGrinder 3.1.1 contains json.jar, one of most famous Json parser(provided from w
 You can use this like the following.
 
 ##### JYTHON
-```
+```python
 from org.json import JSONObject
- 
+
 message = """
 {
   "glossary": {
@@ -28,17 +28,17 @@ message = """
   }
 }
 """
- 
+
 json = JSONObject(message)
 grinder.logger.info(json.get("glossary").getString("title"))
 ```
 
 ##### GROOVY
 For groovy you can use JsonSlurper instead.
-```
+```groovy
 import groovy.json.JsonSlurper
- 
- 
+
+
 ....
 def message = """
 {

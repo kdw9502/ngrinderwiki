@@ -2,11 +2,11 @@
 
 If you choose to use Groovy Script when you create a script, it works similar to Jython script except the JUnit styled test cases. However if you want not only to use Groovy but also to execute JUnit runner in your IDE or easily configure dependencies, you can choose to make Groovy Maven Project first.
 
-![](http://www.cubrid.org/files/attach/images/379199/955/651/image_thumb.png)
+![](assets/Groovy-Maven-Structure-5ed57.png)
 
 If you create Groovy Maven Project, you will have the following directories containing three files under the specified project folder.
 
-![](http://www.cubrid.org/files/attach/images/379199/955/651/image_thumb_1.png)
+![](assets/Groovy-Maven-Structure-e588d.png)
 
 |Location|Description|
 |--------|-----------|
@@ -16,8 +16,7 @@ If you create Groovy Maven Project, you will have the following directories cont
 |${name}/lib|Not automatically generated. but this folder can be used to distribute private libraries if available.|
 
 You can import this project into you IDE using SVN checkout. You may need to check the below links.
-- [Install Groovy IDE](install-groovy-ide)
-- [Import Groovy Maven Project in IDE](import-groovy-maven-project-in-ide)
+- [[Import Groovy Maven Project in IntelliJ]]
 
 In pom.xml, You can specify the additional library dependencies.
 
@@ -28,28 +27,28 @@ In pom.xml, You can specify the additional library dependencies.
     <groupId>ngrinder</groupId>
     <artifactId>${name}</artifactId>
     <version>0.0.1</version>
- 
+
     <properties>
         <jdk-version>1.6</jdk-version>
         <source-encoding>UTF-8</source-encoding>
     </properties>
- 
+
     <repositories>
         <repository>
             <id>nhnopensource.maver.repo</id>
             <url>https://github.com/nhnopensource/nhnopensource.maven.repo/raw/master/releases</url>
         </repository>
     </repositories>
- 
+
     <dependencies>
         <!-- Following dependency is mandatory -->
         <dependency>
             <groupId>org.ngrinder</groupId>
             <artifactId>ngrinder-groovy</artifactId>
-            <version>3.2</version>
+            <version>3.4</version>
             <scope>provided</scope>
         </dependency>
- 
+
         <!-- Add the dependencies -->
         <!--  <dependency>
             <groupId>commons-io</groupId>
@@ -58,7 +57,7 @@ In pom.xml, You can specify the additional library dependencies.
         </dependency>
          -->
         <!-- Put your private library like this -->
-        <!-- 
+        <!--
         <dependency>
             <groupId>your_lib</groupId>
             <artifactId>your_lib</artifactId>
@@ -68,7 +67,7 @@ In pom.xml, You can specify the additional library dependencies.
         </dependency>
         -->
     </dependencies>
- 
+
     <build>
         <plugins>
             <plugin>
@@ -80,21 +79,7 @@ In pom.xml, You can specify the additional library dependencies.
                     <encoding>${source-encoding}</encoding>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.9</version>
-                <configuration>
-                    <additionalProjectnatures>
-                        <projectnature>
-                            org.eclipse.jdt.groovy.core.groovyNature
-                        </projectnature>
-                        <projectnature>
-                            org.eclipse.m2e.core.maven2Nature
-                        </projectnature>
-                    </additionalProjectnatures>
-                </configuration>
-            </plugin>
+
         </plugins>
     </build>
 </project>
@@ -123,25 +108,25 @@ When a script is selected in the performance test configuration page, the contro
 In generic Jython script and Groovy script, the resources are loaded using command "open(“./resources/resource1.txt”)" or "new File("./resources/resource1.txt"). However this won’t work in Groovy Maven project. We had to replace this path based resource discovery into the classpath based resource discovery to make Groovy JUnit test workable in IDE as well,  
 All resources in ${project_name}/src/main/resources/.. are copied into the same folder where the test script is copied but keeping the sub directory hierachy. You can load the resources using code below.
 
-```
+```groovy
 import org.codehaus.groovy.reflection.ReflectionUtils;
 ....
- 
- 
+
+
 class YourTest {
     String text;
- 
+
     @BeforeThread
     public void beforeThread() {
        // In groovy, InputStream contains text field.
        text = loadResourceFromClassPath("/resource1.txt").text;
     }
- 
+
     @Test
     public void doTest() {
        ....
     }
- 
+
     // This is groovy way to load resource from classpath
     public loadResourceFromClassPath(String resourcePath) {
         return ReflectionUtils.getCallingClass(0).getResourceAsStream(resourcePath);

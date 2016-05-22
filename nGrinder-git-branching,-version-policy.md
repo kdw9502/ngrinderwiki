@@ -1,16 +1,6 @@
 ### Branching policy:
-Now we are developing version 3.1, while maintaining version 3.0 at the same time. For this  we need branching. The branching policy will be as  follows:
+* Use git flow from 3.4.1
 
-We will work on a master for version 3.1 version, and create a branch for version 3.0.
-
-We`ll fix some bug and release, we will merge this into master.
-
-
-For 3.0 maintaining, we will release a patch version in 1~4 days depending on the importance and difficulty of feature.
-
-![](http://www.cubrid.org/files/attach/images/379199/156/480/branch.gif)
-
-In the future, we should also follow this policy for branching.
 
 
 ### Version policy:

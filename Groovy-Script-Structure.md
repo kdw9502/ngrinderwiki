@@ -1,10 +1,10 @@
-Not like [Jython Script Structure](jython-script-structure), Groovy Script Structure is based on JUnit. It’s because we want to reuse existing JUnit experiences as much as possible. Several IDEs already well integrate JUnit and let a user to run the test case directly. If you created Goorvy Maven Project in script creation dialog box in nGrinder, you can enjoy the this excellent approach in your current IDE.
+Not like [[Jython Script Structure]], Groovy Script Structure is based on JUnit. It’s because we want to reuse existing JUnit experiences as much as possible. Several IDEs already well integrate JUnit and let a user to run the test case directly. If you created Goorvy Maven Project in script creation dialog box in nGrinder, you can enjoy the this excellent approach in your current IDE.
 
-For now, I’d like to explain the basic Groovy script structure. This is applied whether you choose Groovy Script or Groovy Maven Project. 
+For now, I’d like to explain the basic Groovy script structure. This is applied whether you choose Groovy Script or Groovy Maven Project.
 
 Following is a base template for groovy script.
 
-```
+```groovy
 import static net.grinder.script.Grinder.grinder
 import static org.junit.Assert.*
 import static org.hamcrest.Matchers.*
@@ -14,13 +14,13 @@ import net.grinder.script.Grinder
 import net.grinder.scriptengine.groovy.junit.GrinderRunner
 import net.grinder.scriptengine.groovy.junit.annotation.BeforeThread
 import net.grinder.scriptengine.groovy.junit.annotation.BeforeProcess
- 
+
 import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
- 
+
 import HTTPClient.HTTPResponse
- 
+
 /**
  * A simple example using the HTTP plugin that shows the retrieval of a
  * single page via HTTP.
@@ -31,10 +31,10 @@ import HTTPClient.HTTPResponse
  */
 @RunWith(GrinderRunner)
 class Test1 {
- 
+
     public static GTest test;
     public static HTTPRequest request;
- 
+
     // This method is executed once per a process.
     @BeforeProcess
     public static void beforeClass() {
@@ -43,14 +43,14 @@ class Test1 {
         test.record(request);
         grinder.logger.info("before process.");
     }
- 
+
     // This method is executed once per a thread.
     @BeforeThread
     public void beforeThread() {
         grinder.statistics.delayReports=true;
         grinder.logger.info("before thread.");
     }
- 
+
     // This method is continuously executed until you stop the test
     @Test
     public void test(){
@@ -64,7 +64,7 @@ class Test1 {
 }
 ```
 
-The Groovy test case in nGrinder should be annotated with @RunWith(GroovyRunner). When you run this script in JUnit Runner of each IDE, this part makes GroovyRunner to control the JUnit behavior and mount the grinder context on JUnit. 
+The Groovy test case in nGrinder should be annotated with @RunWith(GroovyRunner). When you run this script in JUnit Runner of each IDE, this part makes GroovyRunner to control the JUnit behavior and mount the grinder context on JUnit.
 
 @Test annotated methods are subject to be executed repeatedly. As you can see above, you can assert the test result using JUnit assertion. If the assertion is failed, the last test bounded to this thread will be evaluated as a failure.
 
@@ -82,14 +82,14 @@ Instead of @BeforeClass @Before @AfterClass @After annotations which are used  i
 
 The execution flow can be illustrated by following.
 
-![](http://www.cubrid.org/files/attach/images/379199/508/651/image_thumb_3.png)
+![](assets/Groovy-Script-Structure-e6c97.png)
 
 In the test case sample, Please look below part carefully.
 
-```
+```groovy
 public static GTest test;
 public static HTTPRequest request;
- 
+
 // This method is executed once per a process.
 @BeforeProcess
 public static void beforeProcess() {
@@ -108,7 +108,7 @@ It’s the first step of test statistic preparation. Any method calls on request
 
 You can define the multiple test methods in a single test case class as well. Just add @Test annotation on those like the following.
 
-```
+```groovy
 @Test
 public void testGoogle(){
     HTTPResponse result = request.GET("http://www.google.com");
@@ -118,7 +118,7 @@ public void testGoogle(){
         assertThat(result.statusCode, is(200));
     }
 }
- 
+
 @Test
 public void testYahoo(){
     HTTPResponse result = request.GET("http://www.yahoo.com");
@@ -132,9 +132,9 @@ public void testYahoo(){
 
 However, you should aware nGrinder GroovyRunner creates only one test case object per a thread not like that generic JUnit test cases which creates a separate test case object for each @Test annotated method. So if each @Test annotated methods share member variables, they can affect each other. It’s intended. In nGrinder test case, it’s very likely each @Test method relies on the previous @Test annotated method execution result. Therefore, if you save the previous test result in the member variable and refer it to decide to continue to next test method, you can easily implement the test dependency.
 
-```
+```groovy
 private boolean googleResult;
- 
+
 @Test
 public void testGoogle(){
     googleResult = false;
@@ -146,7 +146,7 @@ public void testGoogle(){
     }
     googleResult = true;
 }
- 
+
 @Test
 public void testYahoo(){
     if (!googleResult) {
@@ -162,4 +162,4 @@ public void testYahoo(){
 }
 ```
 
-How can you use library and resources?  If you don’t use [Groovy Maven Structure](groovy-maven-structure) yet, you can refer [Jython Script Structure](jython-script-structure) to how to include them in your script. It’s exactly same as Jython way. However if you use Maven structure plus Groovy, you can enjoy the easier library dependency setting and run the JUnit test in your IDE. Interested in this? Then continue to see the [Groovy Maven Structure](groovy-maven-structure) to know how to enable this for you.
+How can you use library and resources?  If you don’t use [[Groovy Maven Structure]] yet, you can refer [[Jython Script Structure]] to how to include them in your script. It’s exactly same as Jython way. However if you use Maven structure plus Groovy, you can enjoy the easier library dependency setting and run the JUnit test in your IDE. Interested in this? Then continue to see the [[Groovy Maven Structure]] to know how to enable this for you.

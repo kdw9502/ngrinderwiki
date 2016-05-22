@@ -5,7 +5,7 @@ Depending on how you have executed nGrinder, you may use a different URL to acce
 
 Once you access the URL, you can see the log in page.
 
-![](http://www.cubrid.org/files/attach/images/379199/166/438/image_thumb_1.png)
+![](assets/General-Administration-Guide-2aae5.png)
 
 ### Log In with default Account
 nGrinder creates 4 users at the first run. The predefined IDs are as follows.  
@@ -29,17 +29,17 @@ To configure the system, you need to log in with an admin account.
 ### Agent Management
 Agent management in the admin menu offers agent operation and monitoring functions. Even when you have configured the agent to connect the controller, you need to approve each agent in the controller to make it effective. This step is required to prevent abnormal agents trying to connect to the controller from abusing the controller.
 
-![](http://www.cubrid.org/files/attach/images/379199/166/438/image_thumb_2.png)
+![](assets/General-Administration-Guide-61d4a.png)
 
-If you are admin, the menu above should be visible. You can click the Agent Management menu to manage agents. 
+If you are admin, the menu above should be visible. You can click the Agent Management menu to manage agents.
 
-![](http://www.cubrid.org/files/attach/images/379199/166/438/image_thumb_3.png)
+![](assets/General-Administration-Guide-95345.png)
 
-Then, you should see the screen shown above. This shows the statuses of the attached agent. If we just allow all agent connections, there would be a potential risk. For this reason, nGrinder only uses approved agents. If you confirm that the agents listed here are OK, you can approve them. Some agents can be only used for specific users. Please refer to [User Agent](private-agent) for details.
+Then, you should see the screen shown above. This shows the statuses of the attached agent. If we just allow all agent connections, there would be a potential risk. For this reason, nGrinder only uses approved agents. If you confirm that the agents listed here are OK, you can approve them. Some agents can be only used for specific users. Please refer to [[User Agent]] for details.
 
 You can monitor agent performance status by clicking each IP.
 
-![](http://www.cubrid.org/files/attach/images/379199/166/438/image_thumb_4.png)
+![](assets/General-Administration-Guide-c9613.png)
 
 This graph shows the performance of each agent in the last 1 minute.
 
@@ -48,19 +48,19 @@ From nGrinder 3.3, agent management page includes the agent auto update feature.
 ### User Management
 Admin can create/delete and modify users through the user management menu. Each user can also modify his/her own profile as well.
 
-![](http://www.cubrid.org/files/attach/images/379199/166/438/image_thumb_5.png)
- 
+![](assets/General-Administration-Guide-56342.png)
+
 ### Script Console
 
-![](http://www.cubrid.org/files/attach/images/379199/166/438/image_thumb_6.png)
+![](assets/General-Administration-Guide-83cfd.png)
 
 This is a useful admin tool for debugging. Admin can input Groovy code to monitor and control nGrinder internal status. for example:
-```
+```groovy
 println(agentManager.getAllAttachedAgents())
 ```
 
 This feature is disabled by default. To enable the script console, put the following option in the system configuration.
-```
+```groovy
 controller.enable_script_console=false
 ```
 
@@ -85,7 +85,7 @@ Sometime it’s important to see the server log to identify a problem and send a
 
 Log monitoring is available in the not cluster mode.
 
-![](http://www.cubrid.org/files/attach/images/379199/166/438/image_thumb_7.png)
+![](assets/General-Administration-Guide-555ec.png)
 
 ### Test Policies
 Sometimes, you need to configure whole test execution policy. For example, you can set the maximum count of agents that each test can use. Or you can limit the max concurrent number of tests to minimize network loads. These kinds of policies can be configured by configuring the ${NGRINDER_HOME}/system.properties file.

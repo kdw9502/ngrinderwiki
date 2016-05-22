@@ -34,7 +34,7 @@
 - Comment
     - Provide a class comment like the following. You should provide a simple description, author, and the version from which this class is provided.
 
-```
+```java
 /**
  * Hibernate CUBRID Dialect
  *
@@ -53,7 +53,7 @@ public class CUBRIDDialect extends Dialect {
     - Each big category of features is divided into subpackage in the com.nhncorp.ngrinder.
 - Do not use SQL directly, as this can cause DB incompatibilities.
 - Eclipse Coding Style file : Eclipse_nGrinder.xml
-    - You can import this style in Windows ==> Preferences ==> Java ==> Formatter 
+    - You can import this style in Windows ==> Preferences ==> Java ==> Formatter
 
 ### JavaScript
 - nGrinder project follows jQuery Coding Convention

@@ -9,4 +9,4 @@ Follow below steps in Chrome browser:
 4. Allow to install local extension
 5. If completed, you will be able to see nGrinder Recorder Extension icon!
 
-If you want to know how to use, [show nGrinder Recorder READMD.md](https://github.com/naver/ngrinder/blob/master/ngrinder-recorder/README.md#ngrinder-recorder-chrome-extension)
+If you want to know how to use, See [nGrinder Recorder READMD.md](https://github.com/naver/ngrinder/blob/master/ngrinder-recorder/README.md#ngrinder-recorder-chrome-extension)

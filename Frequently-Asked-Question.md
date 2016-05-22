@@ -1,6 +1,6 @@
 **I had run the test with 2 process and 2 threads and I checked the log.The number of HTTP call seems like half of what I expected. What's wrong?**
 
-> The underlying The Grinder engine makes a log file per process in the agent side when it executes a test. So if a test use 2 processes, it will generate 2 log files. These logs a test generate can be very huge(even giga-byte level) depending on the how much the error occurs and how long a test is executed. So we made nGrinder agents limit the size of log file and only passes only one log file per a agent process to controller. 
+> The underlying The Grinder engine makes a log file per process in the agent side when it executes a test. So if a test use 2 processes, it will generate 2 log files. These logs a test generate can be very huge(even giga-byte level) depending on the how much the error occurs and how long a test is executed. So we made nGrinder agents limit the size of log file and only passes only one log file per a agent process to controller.
 
 **Why is record() not supported?**
 
@@ -18,4 +18,4 @@
 
 > nGrinder uses ${user.home}/.ngrinder folder to store and retrieve data. However if you install 32Bit JVM on 64bit JVM. ${user.home} returns ? then it does not work well. Please see http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6972329 . The solution is to install 64bit JVM on 64bit OS.
 
->Or... you may not have configured /etc/hosts well. Please check the [Installation Guide](installation-guide) again.
+>Or... you may not have configured /etc/hosts well. Please check the [[Installation Guide]] again.

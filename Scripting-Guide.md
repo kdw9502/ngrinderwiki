@@ -1,43 +1,41 @@
-> nGrinder 3.2 and later supports not only Jython but also Groovy as scripting language. If you want to know about Groovy scripting, please refer [Groovy Script](groovy-script)
+> nGrinder 3.2 and later supports not only Jython but also Groovy as scripting language. If you want to know about Groovy scripting, please refer [[Groovy Script]]
 - You can see various [The Grinder script samples](http://grinder.sourceforge.net/g3/script-gallery.html).
 - You can check [The Grinder APIs](http://grinder.sourceforge.net/g3/script-javadoc/index.html).
 
-More practical ways for the advanced nGrinder user are... 
+More practical ways for the advanced nGrinder user are...
 - Do you want to write and run Groovy script in IDE before running it in nGrinder?
-    - [Install Groovy IDE](install-groovy-ide) - If you prefer Eclipse.
-    - [Import Groovy Maven Project in IDE](import-groovy-maven-project-in-ide)
-    - [Import Groovy Maven Project in IntelliJ](import-groovy-maven-project-in-intellij)
+    - [[Import Groovy Maven Project in IntelliJ]]
 - Do you want to know what script types nGrinder supports?
-    - [Jython Script Structure](jython-script-structure)
-    - [Groovy Script Structure](groovy-script-structure)
+    - [[Jython Script Structure]]
+    - [[Groovy Script Structure]]
 - Do you miss the sample script for groovy?
-    - [Groovy Script Snippet](groovy-script-snippet)
+    - [[Groovy Script Snippet]]
 - Do you need a custom dns entry? Need to change the /etc/hosts file in the agents? You can configure target host fields for this. You don't need root permission in agent machines.
-    - [How to change DNS](how-to-change-dns)
-- Do you need to use your own jar or py? Read followings. 
-    - [How to use library](how-to-use-library)
-- Do you need to load your own xml or txt file? Read followings. 
-    - [How to use resources](how-to-use-resources)
+    - [[How to change DNS]]
+- Do you need to use your own jar or py? Read followings.
+    - [[How to use library]]
+- Do you need to load your own xml or txt file? Read followings.
+    - [[How to use resources]]
 - Do you need to simulate the multiple user scenario in the different run weight?
-    - [How to run the multiple tests with different weight](how-to-run-the-multiple-tests-with-different-weight)
-    - [How to run the multiple tests with different weight - Groovy Way](How-to-run-the-multiple-tests-with-different-weight---Groovy-way)
+    - [[How to run the multiple tests with different weight]]
+    - [[How to run the multiple tests with different weight - Groovy Way]]
 - Do you need to adjust the logger level to only see the errors? Read followings.
-    - [How to adjust logger level](how-to-adjust-logger-level)
+    - [[How to adjust logger level]]
 - Do you need to test DB performance? Doesn't nGrinder seems to support this? No.. You can still test it with nGrinder
-    - [Using nGrinder to perform db load test](using-ngrinder-to-perform-db-load-test)
-- Do you need to parse data retrieved from server? 
-    - [How to parse JSON](how-to-parse-json)
-    - [How to parse XML](how-to-parse-xml)
-- Do you need to define your own statistic? 
-    - [User defined statistic in ngrinder](user-defined-statistic-in-ngrinder)
+    - [[Using nGrinder to perform db load test]]
+- Do you need to parse data retrieved from server?
+    - [[How to parse JSON]]
+    - [[How to parse XML]]
+- Do you need to define your own statistic?
+    - [[User defined statistic in ngrinder]]
 - Do you cope with the big response like movie or file download?
-    - [How to handle the big response](how-to-handle-the-big-response)
+    - [[How to handle the big response]]
 - Do you want to make each thread act differently?
-    - [How to make each thread act differently](how-to-make-each-thread-act-differently)
+    - [[How to make each thread act differently]]
 - Do you need you test a socket.io app?
-    - [How to test a socket.io app](Using-nGrinder-to-perform-load-test-for-a-socket.io-app)
-    - [How to test a socket.io app - Python version](Using-nGrinder-to-perform-load-test-for-socket.io-app-Python-version)
+    - [[How to test a socket.io app]]
+    - [[How to test a socket.io app - Python version]]
 - Do you want to pass the parameter to the script to modify the behavior without script modification?
-    - [How to pass a parameter to the script](how-to-pass-a-parameter-to-the-script)
+    - [[How to pass a parameter to the script]]
 - Do you want to run tests with the native so or dlls?
-    - [How to bind native libraries](how-to-bind-native-libraries)
+    - [[How to bind native libraries]]

@@ -11,10 +11,10 @@
 
 # General Architecture
 nGrinder is a application for running test scripts written in jython(python running on JVM) across a number of machines. It's internal engine is based on Grinder. nGrinder wraps Grinder's console and agent with a controller and agent, respectively, and extends several features to enable multiple concurrent tests.
-![system_architecture](http://www.cubrid.org/files/attach/images/379199/830/434/image_thumb_1.png)
+![system_architecture](assets/Architecture-29bb2.png)
 
 nGrinder consists of two major components.
-> - Controller 
+> - Controller
 	- Provides web interface for performance testing.
 	- Coordinates test processes.
 	- Collates and displays test statistics.
@@ -27,7 +27,7 @@ When agents are started, they attempt to connect to a controller. They then are 
 
 The biggest difference between nGrinder and Grinder is that nGrinder keeps multiple console instances and agents in the controller. Each console is independent from the others, and all can run concurrently. Many agents can be attached in advance, and can be assigned whenever they are requested. Unlike grinder, nGrinder is developed to maximize utilization for agents machines.
 
-Well-known load test tools such as "Performance Center" have a test reservation feature to guarantee agent availability when a user starts a test. But the reservation approach causes an agent utilization problem. We observed that people tend to reserve agents as a precaution even while they are actually not testing. In our experience, the average agent CPU utilization is less than 10% as a result. 
+Well-known load test tools such as "Performance Center" have a test reservation feature to guarantee agent availability when a user starts a test. But the reservation approach causes an agent utilization problem. We observed that people tend to reserve agents as a precaution even while they are actually not testing. In our experience, the average agent CPU utilization is less than 10% as a result.
 
 For this reason, instead of reservation, **nGrinder enables multiple test and dynamic agent allocation** so that agents are dynamically assigned to tests only when a real test is performed. This makes nGrinder a unique solution among all competitors. With a relatively small number of agents, multiple users can run multiple tests concurrently. The number of possible concurrent tests depends on the number of free agents.
 
@@ -35,7 +35,7 @@ For this reason, instead of reservation, **nGrinder enables multiple test and dy
 From nGrinder version 3.1, we introduced nGrinder controller clustering, which make the performance test can be executed by one of the clustered controller and support multiple set of agents(named region) to be used.
 
 Below is the architecture without cluster supports.
-![siglne_architecture](http://www.cubrid.org/files/attach/images/379199/772/545/image_thumb_4.png)
+![standalone_architecture](assets/Architecture-5c692.png)
 
 1. nGrinder uses an embedded svn server(SVNKit DAV) to manage script files. The svn repositories are stored in ${NGRINDER_HOME} directory.
 2. nGrinder uses EhCache to improve the data retrieval performance from DB and SVN repositories.
@@ -43,7 +43,7 @@ Below is the architecture without cluster supports.
 
 If you enable clustering mode by configuring the system.conf (See link) and install nGrinder into multiple machine, the system architect is changed as below:
 
-![cluster_architecture](http://www.cubrid.org/files/attach/images/379199/772/545/image_thumb_7.png)
+![cluster_architecture](assets/Architecture-4913e.png)
 
 1. All the controllers in the cluster shares the same DB and file system. All ngrinder controller should point same ${NGRINDER_HOME} folder which should be shared by NFS.
 2. Each controllers can have its own special properties and log output folder. This information will be saved in ${NGRINDER_EX_HOME} in the each controller.
@@ -52,8 +52,8 @@ If you enable clustering mode by configuring the system.conf (See link) and inst
 Each controller can serve nGrinder web content equally but handles the different test set depending the region. We don't provide any session clustering by default. So you may suffer login problem because sessions stored in a controller are not replicated to the other controllers. You may need to configure this by referring Tomcat Session Clustering Guide or use the sticky session on L4. If you are not a expert on this, Just let users to connect only one controller. It's the easiest. :-)
 
 How to configure the clustering?
-- Check [Easy Clustering Guide](https://github.com/naver/ngrinder/wiki/easy-clustering-guide)
-- Check [Advanced Clustering Guide](https://github.com/naver/ngrinder/wiki/advanced-clustering-guide)
+- Check [[Easy Clustering Guide]]
+- Check [[Advanced Clustering Guide]]
 
 # Technology Stack
 ## Client Tier

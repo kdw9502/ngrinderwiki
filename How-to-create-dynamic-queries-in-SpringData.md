@@ -2,7 +2,7 @@ Compared to iBatis, Spring Data does quite easily support dynamic queries. You s
 
 First let’s assume there is a PerfTest class.
 
-```
+```java
 /**
  * Peformance Test Entity
  *
@@ -10,18 +10,18 @@ First let’s assume there is a PerfTest class.
 @Entity
 @Table(name = "PERF_TEST")
 public class PerfTest extends BaseModel<PerfTest> {
- 
+
     /**
      * UUID
      */
     private static final long serialVersionUID = 1369809450686098944L;
- 
+
     @Column(name = "name")
     private String name;
- 
+
     @Column(length = 2048)
     private String description;
- 
+
     @Enumerated(EnumType.STRING)
     private Status status = Status.READY;
 ...
@@ -34,18 +34,18 @@ In SQL, It might be “select * from perf_test where status in (‘FINISHED’, 
 
 To make it very flexible, we can add JpaSpecificationExecutor<PerfTest> into PerfTestRepository.
 
-```
+```java
 import java.util.List;
- 
+
 import org.ngrinder.perftest.model.PerfTest;
 import org.ngrinder.perftest.model.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
- 
- 
+
+
 public interface PerfTestRepository extends JpaRepository<PerfTest, Integer>, JpaSpecificationExecutor<PerfTest> {
     List<PerfTest> findAllByStatusOrderByCreateDateAsc(Status status);
- 
+
 }
 ```
 
@@ -59,7 +59,7 @@ This will add several JpaSpecificationExecutor  methods into PerfTestRepository.
      * @return
      */
     T findOne(Specification<T> spec);
- 
+
     /**
      * Returns all entities matching the given {@link Specification}.
      *
@@ -67,7 +67,7 @@ This will add several JpaSpecificationExecutor  methods into PerfTestRepository.
      * @return
      */
     List<T> findAll(Specification<T> spec);
- 
+
     /**
      * Returns a {@link Page} of entities matching the given {@link Specification}.
      *
@@ -76,7 +76,7 @@ This will add several JpaSpecificationExecutor  methods into PerfTestRepository.
      * @return
      */
     Page<T> findAll(Specification<T> spec, Pageable pageable);
- 
+
     /**
      * Returns all entities matching the given {@link Specification} and {@link Sort}.
      *
@@ -85,7 +85,7 @@ This will add several JpaSpecificationExecutor  methods into PerfTestRepository.
      * @return
      */
     List<T> findAll(Specification<T> spec, Sort sort);
- 
+
     /**
      * Returns the number of instances that the given {@link Specification} will return.
      *
@@ -99,7 +99,7 @@ These methods dynamically generate SQL based on specs that you pass as argument.
 
 To make specs, You may need a utility method.. I think it’s best to place the utility method in the model class, as follows..
 
-```
+```java
 /**
  * Peformance Test Entity
  *
@@ -108,16 +108,16 @@ To make specs, You may need a utility method.. I think it’s best to place the 
 @Table(name = "PERF_TEST")
 public class PerfTest extends BaseModel<PerfTest> {
       ....
- 
+
     public static Specification<PerfTest> statusSetEqual(final Status... statuses) {
         return new Specification<PerfTest>() {
             @Override
-             
+
             public Predicate toPredicate(Root<PerfTest> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 return cb.not(root.get("status").in((Object[]) statuses));
             }
         };
- 
+
     }
 }
 ```
@@ -126,12 +126,12 @@ This statusSetEqual method generates a Specification instance that generates "in
 
 The test code is as follows.
 
-```
+```java
 public class PerfTestRepositoryTest extends NGrinderIocTransactionalTestBase {
- 
+
     @Autowired
     public PerfTestRepository repo;
- 
+
     @Before
     public void before() {
         PerfTest entity = new PerfTest();
@@ -144,7 +144,7 @@ public class PerfTestRepositoryTest extends NGrinderIocTransactionalTestBase {
         entity3.setStatus(Status.READY);
         repo.save(entity3);
     }
- 
+
     @Test
     public void testPerfTest() {
         List<PerfTest> findAll = repo.findAll(PerfTest.statusSetEqual(Status.FINISHED, Status.CANCELED));

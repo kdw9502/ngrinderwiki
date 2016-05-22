@@ -2,7 +2,7 @@ Sometimes it’s necessary to analyze data returned from server and  put the val
 
 ##### Jython
 You can use ElementTree parser which nGrinder 3.1.1 and above has.
-```
+```python
 from xml.etree import ElementTree
 xmlstring = """
 <hello>
@@ -23,7 +23,7 @@ grinder.logger.info(mydom.findall([0].text)
 The result will be “GOOD"!!”. Please refer http://docs.python.org/2/library/xml.etree.elementtree.html for the detailed API usage.
 
 ##### GROOVY
-```
+```groovy
 def message = """
     <hello>
     <world>

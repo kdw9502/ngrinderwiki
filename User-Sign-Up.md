@@ -10,7 +10,7 @@ nGrinder is the web application. In our company(Naver), more than 1000 users has
 controller.allow_sign_up=true
 ```
 
-   ![](http://www.cubrid.org/files/attach/images/379199/183/080/001/image_thumb_1.png)
+   ![](assets/User-Sign-Up-a0abd.png)
    If you want to get the user email and mobile phone number when new users sign up. Please put the following as well.  
 
    ```
@@ -18,10 +18,10 @@ controller.user_security=true
 ```
    If it’s false, the users can register themselves without the email and mobile phone number.
 3. Log out and check if there is “Sign Up” link in the login page.  
-   ![](http://www.cubrid.org/files/attach/images/379199/183/080/001/image_thumb_2.png)
+   ![](assets/User-Sign-Up-4f74a.png)
 
 ### Sign Up
 1. If the admin enabled the sign up, The user can register him/herself by clicking the sign up button in the login page.
 2. After clicking this button, fill up the user sign up form.  
-   ![](http://www.cubrid.org/files/attach/images/379199/183/080/001/image_thumb_4.png)
+   ![](assets/User-Sign-Up-9be91.png)
 3. After clicking the “Save User” button, the user can login with the created user account.

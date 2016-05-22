@@ -1,9 +1,9 @@
 This chapter describes the advanced nGrinder agent configuration for nGrinder 3.3 or later. You may not need to read this guide if you run nGrinder for personal use. However if you want to run nGrinder as PAAS, you should read this chapter.
 
 ### Agent Download from Controller
-from nGrinder 3.3, the agent packages are not distibuted from sourceforge. But it can be downloaded from the controller. This made big changes in agent configurations. The controller already knows how agents should be configured, it provides the agent package containning the appropriate configuration. For example when the admin user downloads an agent, the agent package contain the generic configurations. However if the general user downloads the package, the package will contain [private agent](https://github.com/naver/ngrinder/wiki/private-agent) configuration.
+from nGrinder 3.3, the agent packages are not distibuted from sourceforge. But it can be downloaded from the controller. This made big changes in agent configurations. The controller already knows how agents should be configured, it provides the agent package containning the appropriate configuration. For example when the admin user downloads an agent, the agent package contain the generic configurations. However if the general user downloads the package, the package will contain [[private agent]] configuration.
 
-See [Installation Guide](installation-guide) to how to download the agent in the web browser.
+See [[Installation Guide]] to how to download the agent in the web browser.
 
 If you prefer to download agents using wget, you can use following URLs directly as well.
 
@@ -20,7 +20,7 @@ wget http://helloworld.com/agent/download/region1/hello
 ```
 If you don’t like to composite URL, just copy the link in the browser and paste it.
 
-The The pre-setup configuration are stored as ./__agent.conf file in the agent package. When the agent starts up, this __agent.conf file will be copied into the ${NGRINDER_AGENT_HOME}/agent.conf if this file does not exists. If there is already ${NGRINDER_AGENT_HOME}/agent.conf, agent will only show the warning message and skip the copy action. Then it will be executed with the preivous agent.conf.
+The The pre-setup configuration are stored as '''./__agent.conf''' file in the agent package. When the agent starts up, this __agent.conf file will be copied into the ${NGRINDER_AGENT_HOME}/agent.conf if this file does not exists. If there is already ${NGRINDER_AGENT_HOME}/agent.conf, agent will only show the warning message and skip the copy action. Then it will be executed with the preivous agent.conf.
 
 If you like to always overwirte the existing agent.conf with __agent.conf, you should run an agent with –o option which forces to overwrite the agent.conf. See agent's [Command Line Options](#command-line-options)
 

@@ -4,12 +4,12 @@ Create jdbc test script:
 
 Open the script list page and click “Create a script”:
 
-![](http://www.cubrid.org/files/attach/images/379199/213/544/image_thumb_2.png)
+![](assets/Using-nGrinder-to-perform-DB-load-test-5fd34.png)
 
 Enter a name and select the checkbox to create lib directory. If you didn’t select it, you can also create the lib directory yourself.
 
 After that, you can get a script based on a simple http test template. Then you can modify the script as below:
-```
+```python
 # -*- coding:utf-8 -*-
 # Database test.
 #
@@ -19,31 +19,31 @@ from net.grinder.script import Test
 from cubrid.jdbc.driver import CUBRIDDriver
 from java.util import Random
 from java.lang import System
- 
+
 test1 = Test(1, "Database insert")
 test2 = Test(2, "Database update")
 random = Random(long(System.nanoTime()))
- 
+
 # Load the JDBC driver.
 DriverManager.registerDriver(CUBRIDDriver())
- 
+
 def getConnection():
     return DriverManager.getConnection("jdbc:CUBRID:localhost:33000:ngrinder_cluster:::?charset=utf-8", "user", "password")
- 
+
 def ensureClosed(object):
     try: object.close()
     except: pass
-     
+
 # One time initialization that cleans out old data.
 connection = getConnection()
 statement = connection.createStatement()
 # initialize the table should want to test.
 statement.execute("drop table if exists ngrinder_update_temp")
 statement.execute("create table ngrinder_update_temp(testid integer, test_number integer)")
- 
+
 ensureClosed(statement)
 ensureClosed(connection)
- 
+
 class TestRunner:
     def __call__(self):
         connection = None
@@ -66,7 +66,7 @@ class TestRunner:
             ensureClosed(insertStatement)
             ensureClosed(connection)
 ```
- 
+
 Then you can click “Validate script” button to validate the syntex of the script. Be careful that the python needs some format requirement for indentation.
 
 **NOTICE:**  
@@ -74,9 +74,9 @@ Don’t forget to save the script, because it will not be saved during validatin
 
 
 If there is no syntex error, then you will have an error about the driver can not be found. Then we need to upload the jdbc library into the “lib” directory. Open the script list page, and go into the lib directory. Click “Upload script or resources”:  
-![](http://www.cubrid.org/files/attach/images/379199/213/544/image_thumb_3.png)  
+![](assets/Using-nGrinder-to-perform-DB-load-test-c8d57.png)  
 Select the jdbc driver of the DB you want to test and upload.  
-![](http://www.cubrid.org/files/attach/images/379199/213/544/image_thumb_4.png)
+![](assets/Using-nGrinder-to-perform-DB-load-test-b0e69.png)
 
 Then go back to your script and validate again. If you get the message as below, it means the script and library has no problem.
 ```
@@ -112,9 +112,9 @@ Totals       3            0            1.33         1.25         56.60
 2013-01-05 11:06:13,347 INFO  validation-0: starting threads
 2013-01-05 11:06:13,423 INFO  validation-0: finished
 ```
- 
+
 Then create a test with this script:  
-![](http://www.cubrid.org/files/attach/images/379199/213/544/image_thumb_6.png)
+![](assets/Using-nGrinder-to-perform-DB-load-test-de2ba.png)
 
 If you have monitor installed on that DB server, you can also set the target server. Then you can get the monitor data during the test.
 
@@ -122,16 +122,16 @@ When you select the script, the uploaded library should appear in resources area
 
 Then you can check the test running and report.
 
-![](http://www.cubrid.org/files/attach/images/379199/213/544/image_thumb_7.png)
+![](assets/Using-nGrinder-to-perform-DB-load-test-0cde5.png)
 
-![](http://www.cubrid.org/files/attach/images/379199/213/544/image_thumb_8.png)
- 
+![](assets/Using-nGrinder-to-perform-DB-load-test-79cbf.png)
+
 In the test above, we create connection in every transaction, so the mean time of every running is about half second.
 
 Below is the test script and report if I get conenction at the beginning of the test and resue the connection. (I commentted some code about getting/closing connection in every transaction.)
 
 ##### Jython
-```
+```python
 # -*- coding:utf-8 -*-
 # Database test.
 #
@@ -141,32 +141,32 @@ from net.grinder.script import Test
 from cubrid.jdbc.driver import CUBRIDDriver
 from java.util import Random
 from java.lang import System
- 
+
 test1 = Test(1, "Database insert")
 test2 = Test(2, "Database update")
 random = Random(long(System.nanoTime()))
- 
+
 # Load the JDBC driver.
 DriverManager.registerDriver(CUBRIDDriver())
- 
+
 def getConnection():
     return DriverManager.getConnection("jdbc:CUBRID:localhost:33000:ngrinder_cluster:::?charset=utf-8", "user", "password")
- 
+
 def ensureClosed(object):
     try: object.close()
     except: pass
-     
+
 # One time initialization that cleans out old data.
- 
+
 connection = getConnection()
 statement = connection.createStatement()
 # initialize the table should want to test.
 statement.execute("drop table if exists ngrinder_update_temp")
 statement.execute("create table ngrinder_update_temp(testid integer, test_number integer)")
- 
+
 ensureClosed(statement)
 #ensureClosed(connection)
- 
+
 class TestRunner:
     def __call__(self):
         #connection = None
@@ -192,7 +192,7 @@ class TestRunner:
 ##### Groovy
 ```
 package org.ngrinder;
-     
+
   import static net.grinder.script.Grinder.grinder
   import static org.junit.Assert.*
   import static org.hamcrest.Matchers.*
@@ -201,14 +201,14 @@ package org.ngrinder;
   import net.grinder.scriptengine.groovy.junit.GrinderRunner
   import net.grinder.scriptengine.groovy.junit.annotation.BeforeProcess
   import net.grinder.scriptengine.groovy.junit.annotation.BeforeThread
-     
+
   import org.junit.Before
   import org.junit.BeforeClass
   import org.junit.Test
   import org.junit.runner.RunWith
-     
+
   import groovy.sql.Sql
-     
+
   /**
    * A simple example using the Groovy SQL that shows the retrieval of a
    * Simple query.
@@ -217,7 +217,7 @@ package org.ngrinder;
   class TestRunner {
       public static GTest test
       public static sql
-     
+
       @BeforeProcess
       public static void beforeProcess() {
           test = new GTest(1, "Test1")
@@ -225,13 +225,13 @@ package org.ngrinder;
           test.record(sql);
           grinder.logger.info("before process.");
       }
-     
+
       @BeforeThread
       public void beforeThread() {
           grinder.statistics.delayReports=true;
           grinder.logger.info("before thread.");
       }
-     
+
       @Test
       public void test(){
           sql.eachRow( 'select * from code' ) { println "$it.s_name -- ${it.f_name} --" }

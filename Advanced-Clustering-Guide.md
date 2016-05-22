@@ -1,17 +1,17 @@
 > - This feature is available from 3.1
 - This explain the advanced cluster configuration requiring NFS and Cubrid.
-- If you want to run cluster without much effort, see [Easy Clustering Guide](easy-clustering-guide).
+- If you want to run cluster without much effort, see [[Easy Clustering Guide]].
 
 We enhanced nGrinder to support clustering from 3.1.
 
-If you don’t know about nGrinder cluster, please refer to [Cluster Architecture](cluster-architecture). Following shows how to set up nGrinder cluster mode. Assuming you have been familiar with nGrinder in single instance mode. All nGrinder controllers should use the same DB and file system in cluster mode. What we should do at first is to make a shared folder on the NFS and make all controllers point this as ${NGRINDER_HOME}. And edit ${NGRINDER_HOME}/system.conf like followings.  
+If you don’t know about nGrinder cluster, please refer to [[Cluster Architecture]] Following shows how to set up nGrinder cluster mode. Assuming you have been familiar with nGrinder in single instance mode. All nGrinder controllers should use the same DB and file system in cluster mode. What we should do at first is to make a shared folder on the NFS and make all controllers point this as ${NGRINDER_HOME}. And edit ${NGRINDER_HOME}/system.conf like followings.  
 ```
 # if you want to enable ngrinder controller clustering. please enable below.
 ngrinder.cluster.mode=true
- 
+
 # list of controller IPs
 ngrinder.cluster.uris=xx.xx.xx.xx;xx.xx.xx.xx
- 
+
 # cache cluster listener port.
 ngrinder.cluster.listener.port=40003
 ```
@@ -29,7 +29,7 @@ ngrinder.cluster.region=Beijing
 
 After finish this configuration, just restart all nGrinder controllers and login again. We will see this icon at headline!
 
-![](http://www.cubrid.org/files/attach/images/379199/150/524/image_thumb_1.png)
+![](assets/Advanced-Clustering-Guide-566c7.png)
 
 If you want to put the L4 or load balancer in front of all controllers, you should set it up as sticky session so that each client connects only one controller. Otherwise, users may login again whenever they access difference controller.
 

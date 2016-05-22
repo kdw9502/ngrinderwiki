@@ -2,10 +2,10 @@ From nGrinder 3.2.3, nGrinder Controller supports 3 simple web APIs which a user
 ```
 # Clone the existing perftest and start
 curl -u admin:admin http://host_name/perftest/api/226/clone_and_start
- 
+
 # See the existing perftest
 curl -u admin:admin http://host_name/ngrinder-controller/perftest/api/226
- 
+
 # See the list of existing perftests
 curl -u admin:admin http://host_name/ngrinder-controller/perftest/api
 ```
@@ -140,4 +140,4 @@ Above call will show the last 3 perf tests which exists in the ngrinder. This wi
 curl –u admin:admin –s http://host_name/perftest/api?size=10 | jq “.[4].agentCount”
 ```
 
-See [Rest API](REST-API)
+See [[Rest API]]

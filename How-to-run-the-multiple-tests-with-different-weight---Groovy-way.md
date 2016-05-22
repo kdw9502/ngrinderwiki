@@ -2,7 +2,7 @@
 
 From nGrinder 3.2.1, nGrinder supports a special annotation "@RunRate" for Groovy script. You can assign this annotation on test methods to control the run frequency. @RunRate takes the run rate value in the unit of percentage(0..100). For example, @RunRate(10) means that this method is executed only 10% of total runs.
 
-```
+```groovy
 @RunRate(10)
 @Test
 public void doTest() {
@@ -12,7 +12,7 @@ public void doTest() {
 
 Be careful! the above number 10  is NOT the this method’s relative execution rate of total test methods. Each @RunRate annotated method is completely independent from other @RunRate annotated test methods. For example, assume there are two test methods annotated by @RunRate.
 
-```
+```groovy
 @RunWith(GrinderRunner)
 class TestRunner {
     ...
@@ -21,7 +21,7 @@ class TestRunner {
     void doTest1() {
            ...
     }
- 
+
     @RunRate(20)
     @Test
     void doTest2() {
@@ -45,7 +45,7 @@ nGrinder agent thread will try to execute the above test methods by loop. When n
 -  ….
 
 You might want to simulate this in your IDE by simulating the execution loop. Only you should do is to provide @Repeat annotation on the class level like following.
-```
+```groovy
 @Repeat(200)
 @RunWith(GrinderRunner)
 class TestRunner {
@@ -55,7 +55,7 @@ class TestRunner {
     void doTest1() {
            ...
     }
- 
+
     @RunRate(20)
     @Test
     void doTest2() {

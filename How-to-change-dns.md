@@ -1,8 +1,8 @@
 >From nGrinder 3.3, multiple DNS entries to a single host name simulates L4 round-robin behavior.
 
-### Custom DNS 
+### Custom DNS
 If you need to call the target server with a domain name which is not registered in DNS server, usually this is done by adding the host entry in /etc/hosts. However configuring the tens of agents takes time. So.. nGrinder ships with custom DNS service internally. Instead of touching /etc/hosts, you can configure this on the Target Host field in the nGrinder test configuration. This settings will be automatically distributed when the test is executed. Just put the host name and IP pair in the target host files in the test configuration page. That's it.  
-![](http://www.cubrid.org/files/attach/images/379199/691/546/dns.png)
+![](assets/How-to-change-dns-65404.png)
 
 ### L4 Simulation by multiple DNS entries
 To make system the reliable and scalable , developers frequently use L4 in front of a number of servers so that clients access the L4 VIP (virtual IP) first and L4 distributes them into currently available back-end servers. L4 can be shared by multiple services so that L4 can distribute the requests to the different set of servers depending on where the requests come from.  
@@ -11,7 +11,7 @@ We always recommend to write the script which connects to the servers directly n
 ```groovy
 @RunWith(GrinderRunner)
 class TestRunner {
- 
+
     public static GTest test
     public static HTTPRequest request
     String[] ips =
@@ -19,7 +19,7 @@ class TestRunner {
         "10.101.10.2",
         "10.101.10.3",
         "10.101.10.4"
- 
+
     @BeforeProcess
     public static void beforeProcess() {
         HTTPPluginControl.getConnectionDefaults().timeout = 6000
@@ -28,14 +28,14 @@ class TestRunner {
         test.record(request)
         grinder.logger.info("before process.")
     }
- 
- 
+
+
     @BeforeThread
     public void beforeThread() {
         grinder.statistics.delayReports=true
         grinder.logger.info("before thread.")
     }
- 
+
     @Test
     public void test(){
         Random rand = new Random()
@@ -47,9 +47,9 @@ class TestRunner {
 }
 ```
 
-However this makes the script complex and not easy to understand. In case of HTTPS, things are worse. It's because each HTTPS call should have the domain name inside so that the HTTP certificate can be verified well. To avoid this, nGrinder 3.3 supports the L4 simulation by DNS rotation by putting same host name to multiple IPs in the target host fields. 
+However this makes the script complex and not easy to understand. In case of HTTPS, things are worse. It's because each HTTPS call should have the domain name inside so that the HTTP certificate can be verified well. To avoid this, nGrinder 3.3 supports the L4 simulation by DNS rotation by putting same host name to multiple IPs in the target host fields.
 
-![](http://www.cubrid.org/files/attach/images/379199/691/546/target_host.png)
+![](assets/How-to-change-dns-2b5d3.png)
 
 Whenever the new DNS resolution is required, the ngrinder underlying DNS engine checks there are multiple IPs mapped to the given DNS name. If there are multiple IPs, it randomly returns one of them.  
 ```

@@ -2,13 +2,13 @@ nGrinder 3.X uses ${user.home}/.ngrinder as a data and configuration storage.
 
 You can easily attach that storage by autowiring Config class.
 
-```
+```groovy
 @ContextConfiguration("classpath:applicationContext.xml")
 public class ConfigTest extends AbstractJUnit4SpringContextTests {
- 
+
     @Autowired
     public Config config;
- 
+
     @Test
     public void testDefaultHome() {
         Home home = config.getHome();

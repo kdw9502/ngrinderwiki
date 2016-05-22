@@ -14,7 +14,7 @@ java -XX:MaxPermSize=200m -jar  ngrinder-controller-X.X.war --ngrinder-home /hom
 ```
 
 if you like to run multiple nGrinder controllers(each will handle only one network region) and make them work as one(cluster mode), you should make all controller share the same ${NGRINDER_HOME} content.  
-It’s usually done by using NFS for ${NGRINDER_HOME path}. See [Cluster Architecture](cluster-architecture) for detail.
+It’s usually done by using NFS for ${NGRINDER_HOME path}. See [[Cluster Architecture]] for detail.
 
 #### ${NGRINDER_EX_HOME}
 ${NGRINDER_EX_HOME} is used to specialize each controller in the cluster mode. By default, it’s set as ~/.ngrinder_ex.  
@@ -51,7 +51,7 @@ If you run ngrinder in none cluster mode (which means you didn’t provide “-c
 |-cp / --controller-port"|-cp 9000|controller.port|controller port for agent connection.|
 
 #### Easy cluster mode
-Some companies uses multiple IDCs and they require the clustering (mulitple region support in a single nGrinder instance) feature. However nGrinder before 3.3 version requires Network File System to share ${NGRINDER_HOME} and Cubrid to have same DB by multiple controllers. We removes these requirements by allowing multiple controller installation in a single machine and allowing H2 TCP server connection. To understand easy clustering, we highly recommend to read our [Easy Clustering Guide](easy-clustering-guide).
+Some companies uses multiple IDCs and they require the clustering (mulitple region support in a single nGrinder instance) feature. However nGrinder before 3.3 version requires Network File System to share ${NGRINDER_HOME} and Cubrid to have same DB by multiple controllers. We removes these requirements by allowing multiple controller installation in a single machine and allowing H2 TCP server connection. To understand easy clustering, we highly recommend to read our [[Easy Clustering Guide]].
 
 You can run controller in easy cluster mode by the following command.
 ```
@@ -80,7 +80,7 @@ See [cluster realted configurations](Controller-Configuration-Guide#cluster-rela
 ### Configurations
 When a controller starts up, it copied default configurations into the ${NGRINDER_HOME}. You can modify them to set up the controller.
 
-#### ${NGRINDER_HOME}/database.conf 
+#### ${NGRINDER_HOME}/database.conf
 - This contains the database configuration. You can modify this file when you need to use Cubrid. By default, nGrinder uses H2 as a database.  
    ```
 database=H2
@@ -98,8 +98,8 @@ database_url=tcp://{your_h2_server_host_ip_or_name}:{the_h2_server_port}/db/ngri
    ```
 database=cubrid
 
-database_url={your_cubrid_host_ip_or_name}:{cubrid_port_maybe_33000}:{dbname} 
- 
+database_url={your_cubrid_host_ip_or_name}:{cubrid_port_maybe_33000}:{dbname}
+
 database_username=admin
 
 database_password=admin
@@ -109,7 +109,7 @@ database_password=admin
 database_url_option=&althosts={you_cubrid_secondary_host_ip_or_name}:{cubrid_port_maybe_33000}
 ```
 
-#### ${NGRINDER_HOME}/system.conf 
+#### ${NGRINDER_HOME}/system.conf
 
 ##### Generic
 - This contains controller configurations.
@@ -154,7 +154,7 @@ controller.max_vuser_per_agent|3000|agent.max.vuser|The maximum number of vusers
 |controller.safe_dist_threshold|1000000|ngrinder.dist.safe.threashhold|If the files are bigger, the transmission error possibility is increased as well. nGrinder automatically enable safe script transmission by looking the file size. If you want to disable this, please make it 100000000.|
 
 ##### Cluster-Related Configurations
-This file can have serveral cluster mode related options as well. Because ${NGRINDER_HOME}/system.conf should be shared by multiple controllers via NFS, 
+This file can have serveral cluster mode related options as well. Because ${NGRINDER_HOME}/system.conf should be shared by multiple controllers via NFS,
 some cluster related configurations which applies to all controllers in the cluster can be located here for easy administration.  
 Followings are the options.
 
@@ -182,24 +182,24 @@ If you run controller in the single mode or easy cluster mode, you don’t need 
 This file defines the logic to determine the appropriate combination of processes and threads for the given count of vusers.  
 This file provides the flexible way to configure the appropriate processes and threads. Users usually don’t know which process and thread combination can result the best performance. Therefore, nGrinder let a user just input expected vuser per agent and configure the process and thread count automatically.  
 The default logic is like following.
-```
+```javascript
 function getProcessCount(total) {
     if (total < 2) {
         return 1;
     }
-     
+
     var processCount = 2;
- 
+
     if (total > 80) {
         processCount = parseInt(total / 40) + 1;
     }
-     
+
     if (processCount > 10) {
         processCount = 10;
     }
     return processCount;
 }
- 
+
 function getThreadCount(total) {
     var processCount = getProcessCount(total);
     return parseInt(total / processCount);

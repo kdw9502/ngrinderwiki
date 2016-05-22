@@ -7,9 +7,9 @@ But in ngrinder, in previous 3.1.2 version, you can not see that data in test re
 The sample script is below:
 
 ##### JYTHON
-```
+```python
 # -*- coding:utf-8 -*-
- 
+
 # A simple example using the HTTP plugin that shows the retrieval of a
 # single page via HTTP.
 #
@@ -21,39 +21,39 @@ from net.grinder.script import Test
 from net.grinder.plugin.http import HTTPRequest
 from net.grinder.plugin.http import HTTPPluginControl
 from java.util import Random
- 
+
 control = HTTPPluginControl.getConnectionDefaults()
 # if you don't want that HTTPRequest follows the redirection, please modify the following option 0.
 # control.followRedirects = 1
 # if you want to increase the timeout, please modify the following option.
 control.timeout = 6000
- 
+
 test1 = Test(1, "Test1")
 request1 = HTTPRequest()
- 
+
 #grinder.statistics.registerDataLogExpression("Delivery time", "userLong0")
 grinder.statistics.registerSummaryExpression("User_defined", "(/ userLong0(+ (count timedTests)))")
-                         
+
 # Make any method call on request1 increase TPS
 test1.record(request1)
 random = Random()
- 
+
 class TestRunner:
     # initlialize a thread
     def __init__(self):
         grinder.statistics.delayReports=True
         pass
- 
+
     # test method      
     def __call__(self):
         result = request1.GET("http://www.naver.com")
-         
+
         # do something
         deliveryTime = random.nextInt(1000)
         grinder.sleep(deliveryTime)
         grinder.logger.info("deliveryTime: %d" % deliveryTime)
         grinder.statistics.forLastTest.setLong("userLong0", deliveryTime)
-         
+
         if result.getStatusCode() == 200 :
             grinder.statistics.forLastTest.success = 1
         elif result.getStatusCode() in (301, 302) :
@@ -64,13 +64,13 @@ class TestRunner:
 ```
 
 ##### Groovy
-```
+```groovy
 @RunWith(GrinderRunner)
 class Test1 {
- 
+
     public static GTest test;
     public static HTTPRequest request;
- 
+
     @BeforeProcess
     public static void beforeClass() {
         test = new GTest(1, "aa000000");
@@ -80,16 +80,16 @@ class Test1 {
         test.record(request);
         grinder.logger.info("before process.");
     }
-     
+
     Random random = new Random();
-     
+
     @BeforeThread
     public void beforeThread() {
         grinder.statistics.delayReports=true;
         grinder.logger.info("before thread.");
     }
- 
- 
+
+
     @Test
     public void test(){
         HTTPResponse result = request.GET("http://www.google.com");
@@ -98,7 +98,7 @@ class Test1 {
         grinder.logger.info("deliveryTime: ${deliveryTime}")
         // Update statistics
         grinder.statistics.forLastTest.setLong("userLong0", deliveryTime)
-         
+
         if (result.statusCode == 301 || result.statusCode == 302) {
             grinder.logger.warn("Warning. The response may not be correct. The response code was {}.", result.statusCode);
         } else {
@@ -107,5 +107,5 @@ class Test1 {
     }
 ```
 
-Currently, only one chart can be displayed for the user defined statistic, and the name of this statistic should be “User_defined”. For more detailed description of usage, you can refer the document of grinder:   [registerSummaryExpression](http://grinder.sourceforge.net/g3/script-javadoc/net/grinder/script/Statistics.html#registerSummaryExpression(java.lang.String, java.lang.String)). After running a test with this script, you can see the chart for user defined statistics in the detailed report.  
-![](http://www.cubrid.org/files/attach/images/379199/353/592/image_thumb.png)
+Currently, only one chart can be displayed for the user defined statistic, and the name of this statistic should be “User_defined”. For more detailed description of usage, you can refer the document of grinder:   [Register Summary Expression](http://grinder.sourceforge.net/g3/script-javadoc/net/grinder/script/Statistics.html#registerSummaryExpression(java.lang.String, java.lang.String)). After running a test with this script, you can see the chart for user defined statistics in the detailed report.  
+![](assets/User-defined-statistic-in-nGrinder-d533d.png)

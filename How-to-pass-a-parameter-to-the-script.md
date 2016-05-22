@@ -1,5 +1,5 @@
 From nGrinder 3.2.3, a user can set the test parameter in the test configuration page which can be passed into test.  
-![](http://www.cubrid.org/files/attach/images/379199/305/788/image_thumb.png)
+![](assets/How-to-pass-a-parameter-to-the-script-7b8ca.png)
 
 Parameter should be provided as 1~30 alphabet, numeric characters or underbar without spaces. When a test is executed, this are passed as a java parameter like –Dparam=value.
 
