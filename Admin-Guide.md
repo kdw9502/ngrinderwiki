@@ -9,5 +9,5 @@ This page provides the collection of nGrinder administrative guides.
 - [[Agent Auto Update]]
 - [[Private Agent]]
 - [[User Sign Up]]
-- [[REST APIs]]
+- [[REST API]]
 - [[Script Security]]
