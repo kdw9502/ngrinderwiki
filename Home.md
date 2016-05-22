@@ -13,7 +13,6 @@ nGrinder is being developed by Naver Business Platform and NHN China together.
     - [[Admin Guide]]
     - [[User Guide]]
     - [[Scripting Guide]]
-    - [[Plugin Guide]]
 - [[Script Collection]]
 - [[Dev Document]]
 - [[Frequently Asked Question]]
