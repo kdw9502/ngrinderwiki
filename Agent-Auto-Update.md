@@ -6,6 +6,7 @@ If you’re using nGrinder 3.3 or later controller and agent, you don’t need t
 2. Select the agents to be updated and click “Update” button. The ball on the left side will be blicked while the updating is being progressed.  
    ![](assets/Agent-Auto-Update-b3754.png)
 3. Then the update will be finished about 20~40 seconds after. Please make sure that your agent status READY again.
+
    ![](assets/Agent-Auto-Update-41587.png)  
 
 The agent update is workable only when following constraints are met.
