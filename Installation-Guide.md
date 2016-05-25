@@ -8,6 +8,9 @@
     - Controller : Any ==> Monitor : 13243
     - Controller ==> Public user : This is dependent on your tomcat configuration. By default, it is set as 8080.
 
+### Docker
+If you prefer to run in docker. Please see https://hub.docker.com/r/ngrinder/controller/
+
 ### Download
 You can download nGridner controller from the following link.
 - http://sourceforge.net/projects/ngrinder/files
