@@ -13,7 +13,7 @@ If you prefer to run in docker. Please see https://hub.docker.com/r/ngrinder/con
 
 ### Download
 You can download nGridner controller from the following link.
-- http://sourceforge.net/projects/ngrinder/files
+- https://github.com/naver/ngrinder/releases
 
 ### Install Controller
 nGrinder is distributed as a self executable web archive file(WAR) file just like Jenkins, you can put this archive file into your familar web application server (like Tomcat) or run the package in the command line.  
