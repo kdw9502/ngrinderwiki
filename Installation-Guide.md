@@ -8,9 +8,6 @@
     - Controller : Any ==> Monitor : 13243
     - Controller ==> Public user : This is dependent on your tomcat configuration. By default, it is set as 8080.
 
-### Docker
-If you prefer to run in docker. Please see https://hub.docker.com/r/ngrinder/controller/
-
 ### Download
 You can download nGridner controller from the following link.
 - https://github.com/naver/ngrinder/releases
@@ -18,6 +15,10 @@ You can download nGridner controller from the following link.
 ### Install Controller
 nGrinder is distributed as a self executable web archive file(WAR) file just like Jenkins, you can put this archive file into your familar web application server (like Tomcat) or run the package in the command line.  
 **!Be careful, Never locate the war file in the space containing folder like "C:\Program Files\Tomcat\webapps\".**
+
+### Run on Docker
+If you prefer to run in docker. Please see https://hub.docker.com/r/ngrinder/controller/
+
 
 ### Run as a self executable
 1. Please make sure that you configured PATH and JAVA_HOME properly in advance.  
@@ -27,19 +28,17 @@ nGrinder is distributed as a self executable web archive file(WAR) file just lik
    ```
    java -jar ngrinder-controller-X.X.war
    ```
-3. Then you will see the following error message. nGrinder requires very big PermGen memory because it includes very many libraries such as  SVNKit, maven, Jetty webserver, groovy, and python. Re-run the ngrinder with the PermGen settings.  
+3. Then you will see the following error message. nGrinder requires very big PermGen memory because it includes very many libraries such as  SVNKit, maven, Jetty webserver, groovy, and python. Re-run the ngrinder with the PermGen settings.  nGrinder needs quite big perm-gen memory. Please run nGrinder with the following command.
+
+
    ```
-nGrinder needs quite big perm-gen memory.
-
-Please run nGrinder with the following command.
-
-java -XX:MaxPermSize=200m -jar  ngrinder-controller-3.3.war
+java -XX:MaxPermSize=200m -jar  ngrinder-controller-3.4.war
 ```
 4. By default, nGrinder uses 8080 for web server port. If you want to use the other port, please assign --port port_number as a parameter.
    ```
-java -XX:MaxPermSize=200m -jar  ngrinder-controller-3.3.war --port 80
+java -XX:MaxPermSize=200m -jar  ngrinder-controller-3.4.war --port 80
 ```
-5. While exuecting the war file, the war will be extracted into ~/.ngrinder/webapp folder and creates serveral default data files like DBs into .ngrinder folder.
+5. While executing the war file, the war will be extracted into ~/.ngrinder/webapp folder and creates serveral default data files like DBs into .ngrinder folder.
 6. If you can see the following logs in the screen, The ngridner controller is now ready to run.
    ```
 INFO 14. 1. 20 오후 4:39:liquibase: ChangeSet ngrinder_datachange_logfile/db.changelog_schema_22.xml::22::ngrinder.3.3 r
