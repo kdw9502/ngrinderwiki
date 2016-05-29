@@ -20,7 +20,7 @@ Plugin Framework for Java (PF4J) 개발방법
   1. nGrinder는 사용자들이 필요에 맞춰 자유로운 Plugin을 개발할 수 있도록 아래와 같은 확장 포인터들을 제공하고 있다.
  https://github.com/songeunwoo/ngrinder/wiki/How-to-develop-plugin
   2. 확장 포인터를 상속 받기 위해 ngrinder-core와 pf4j dependency를 추가한다.
-  
+
   ```xml
     <dependency>
         <groupId>org.ngrinder</groupId>
@@ -41,9 +41,9 @@ Plugin Framework for Java (PF4J) 개발방법
   ```
   4. 코드 작성시에는 PF4J plugin을 상속 받아준후 생성자로 PluginWrapper를 주입해 준다.
   ```java
-    public class UserLoginPlugin extends Plugin {
+    public class UserLogin extends Plugin {
 
-        public UserLoginPlugin(PluginWrapper wrapper) {
+        public UserLogin(PluginWrapper wrapper) {
             super(wrapper);
         }
 
@@ -53,11 +53,11 @@ Plugin Framework for Java (PF4J) 개발방법
   내부 클레스로 ngrinder-core의 확장 포인터들 중에서 구현하고자 하는 코드를 구현 한 후 내부 클레스에는 @Extension 어노테이션을 주어 PF4J 컴파일시에 인덱스 될수 있도록 해준다.
   ```java
       @Extension
-      public static class UserLoginPluginExtension implements UserLoginPlugin {
+      public static class UserLoginExtension implements OnLoginRunnable {
 
           @Override
           public User loadUser(final String userId) {
-              return "Welcome";
+              ....
           }
 
       }
@@ -66,13 +66,59 @@ Plugin Framework for Java (PF4J) 개발방법
   ```
   target/classes/META-INF/MANIFEST.MF
   ```
+  5. 빌드후 생성된 jar파일을 .ngrinder/plugins 폴더에 넣어준 후 ngrinder를 재 시작 한다.
 
-  5. 해당 메서드를 호출시에는 getExtensions 이라는 메서드를 사용하여 호출해 줍니다.
 
+customizing for ngrinder
+========================
+  1. 의존성주입
 
-ngrinder적용기
+  ngrinder-controller와 ngrinder-core 프로젝트간에 의존성 주입 문제를 해결 하고자 pf4j-spring을 추가적으로 사용하였다.
+  ```xml
+    <dependency>
+        <groupId>ro.fortsoft.pf4j</groupId>
+        <artifactId>pf4j-spring</artifactId>
+        <version>0.2.0</version>
+		</dependency>
+  ```
 
- 단점들에 대해서 적용
+  pf4j-spring을 사용하여 SpringExtensionFactory를 상속받아 ngrinder의 ApplicationContext를 주입하여 사용할수 있었다.
+
+  ```java
+  @Component
+  public class NGrinderSpringExtensionFactory extends SpringExtensionFactory {
+
+    private final PluginManager pluginManager;
+
+    @Autowired
+    private ApplicationContext applicationContext;
+
+    @Autowired
+    public NGrinderSpringExtensionFactory(PluginManager pluginManager) {
+    	super(pluginManager);
+    	this.pluginManager = pluginManager;
+    }
+
+    protected void setApplicationContext(ApplicationContext applicationContext) {
+    	this.applicationContext = applicationContext;
+    }
+
+    @Override
+    public Object create(Class<?> extensionClass) {
+    	Object extension = createWithoutSpring(extensionClass);
+    	if (extension != null) {
+    		PluginWrapper pluginWrapper = pluginManager.whichPlugin(extensionClass);
+    		if (pluginWrapper != null) {
+            applicationContext.getAutowireCapableBeanFactory().autowireBean(extension);
+    		}
+    	}
+    	return extension;
+    }
+
+  }
+  ```
+
+  2.
 
 
 
