@@ -86,7 +86,7 @@ customizing for ngrinder
 		</dependency>
   ```
 
-  pf4j-spring을 사용하여 SpringExtensionFactory를 상속받아 ngrinder의 ApplicationContext를 주입하여 사용할수 있었다.
+  pf4j-spring의 SpringExtensionFactory를 상속받아 ngrinder의 ApplicationContext를 주입하여 사용할수 있었다.
 
   ```java
   @Component
@@ -125,8 +125,8 @@ customizing for ngrinder
   2. JAR파일 지원
 
   기존 PF4J는 컴파일된 폴더 파일 형식만 읽도록 되어 있었다. nGrinder에서는 개발의 편의성을 위하여 JAR파일을 읽을수 있도록 개선 하였다.
-  pf4j의 AbstractExtensionFinder를 상속받아 @Override 하여 구현 하였다.
-  NGrinderDefaultExtensionFinder에서 findResource를 해줄때에는 @Extension 어노테이션을 주어 생성해 놓은 "META-INF/extensions.idx" 파일을 참조 하였다.
+  pf4j의 AbstractExtensionFinder를 상속받아 NGrinderDefaultExtensionFinder에서 구현 하였으며,
+  readPluginsStorages()에서 findResource를 찾을때에는 @Extension 어노테이션을 주어 생성해 놓은 "META-INF/extensions.idx" 파일을 참조 하였다.
   ```java
   public class NGrinderServiceProviderExtensionFinder extends AbstractExtensionFinder {
 
