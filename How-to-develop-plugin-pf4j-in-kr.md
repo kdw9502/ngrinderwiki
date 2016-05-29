@@ -20,19 +20,19 @@ Plugin Framework for Java (PF4J) 개발방법
   1. nGrinder는 사용자들이 필요에 맞춰 자유로운 Plugin을 개발할 수 있도록 아래와 같은 확장 포인터들을 제공하고 있다.
  https://github.com/songeunwoo/ngrinder/wiki/How-to-develop-plugin
   2. 확장 포인터를 상속 받기 위해 ngrinder-core와 pf4j dependency를 추가한다.
-```xml
-  <dependency>
-      <groupId>org.ngrinder</groupId>
-      <artifactId>ngrinder-core</artifactId>
-      <version>${ngrinder.core.version}</version>
-      <scope>provided</scope>
-  </dependency>
-  <dependency>
-      <groupId>ro.fortsoft.pf4j</groupId>
-      <artifactId>pf4j</artifactId>
-      <version>${pf4j.version}</version>
-  </dependency>
-```
+  ```xml
+    <dependency>
+        <groupId>org.ngrinder</groupId>
+        <artifactId>ngrinder-core</artifactId>
+        <version>${ngrinder.core.version}</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>ro.fortsoft.pf4j</groupId>
+        <artifactId>pf4j</artifactId>
+        <version>${pf4j.version}</version>
+    </dependency>
+  ```
   3. pom.xml 파일에 해당 플러그인 검색을 위한 manifestEntries 설정 정보를 입력한다. 해당 입력 정보는 comfile시 아래 경로에서 확인할수 있다.
   ```
   target/classes/META-INF/MANIFEST.MF
@@ -49,21 +49,21 @@ Plugin Framework for Java (PF4J) 개발방법
   ```
 
   내부 클레스로 ngrinder-core의 확장 포인터들 중에서 구현하고자 하는 코드를 구현 한 후 내부 클레스에는 @Extension 어노테이션을 주어 PF4J 컴파일시에 인덱스 될수 있도록 해준다.
-```java
-    @Extension
-    public static class UserLoginPluginExtension implements UserLoginPlugin {
+  ```java
+      @Extension
+      public static class UserLoginPluginExtension implements UserLoginPlugin {
 
-        @Override
-        public User loadUser(final String userId) {
-            return "Welcome";
-        }
+          @Override
+          public User loadUser(final String userId) {
+              return "Welcome";
+          }
 
-    }
-```
-인덱싱된 파일 정보는 아래 경로에서 확인 가능 하다.
-```
-target/classes/META-INF/MANIFEST.MF
-```
+      }
+  ```
+  인덱싱된 파일 정보는 아래 경로에서 확인 가능 하다.
+  ```
+  target/classes/META-INF/MANIFEST.MF
+  ```
 
   5. 해당 메서드를 호출시에는 getExtensions 이라는 메서드를 사용하여 호출해 줍니다.
 
