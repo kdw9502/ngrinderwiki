@@ -20,6 +20,7 @@ Plugin Framework for Java (PF4J) 개발방법
   1. nGrinder는 사용자들이 필요에 맞춰 자유로운 Plugin을 개발할 수 있도록 아래와 같은 확장 포인터들을 제공하고 있다.
  https://github.com/songeunwoo/ngrinder/wiki/How-to-develop-plugin
   2. 확장 포인터를 상속 받기 위해 ngrinder-core와 pf4j dependency를 추가한다.
+  
   ```xml
     <dependency>
         <groupId>org.ngrinder</groupId>
@@ -33,6 +34,7 @@ Plugin Framework for Java (PF4J) 개발방법
         <version>${pf4j.version}</version>
     </dependency>
   ```
+
   3. pom.xml 파일에 해당 플러그인 검색을 위한 manifestEntries 설정 정보를 입력한다. 해당 입력 정보는 comfile시 아래 경로에서 확인할수 있다.
   ```
   target/classes/META-INF/MANIFEST.MF
