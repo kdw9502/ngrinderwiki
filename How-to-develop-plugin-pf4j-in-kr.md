@@ -230,6 +230,6 @@ customizing for ngrinder
 마치며..
 ======
 
-기존 Atlassian Plugin Framework(APF)를 사용할 때에는 atlas-package 라는 별도의 빌드 방식으로 comfile을 해야하는 어려움이 있었지만, PF4J는 기존 maven빌드 방식 그대로 사용이 가능 하다.
-또한 APF에서 PF4J로 변경 하여 약 4000KB resource를 80KB로 감량 할수 있었다. 
+>기존 Atlassian Plugin Framework(APF)를 사용할 때에는 atlas-package 라는 별도의 빌드 방식으로 comfile을 해야하는 어려움이 있었지만, PF4J는 기존 maven빌드 방식 그대로 사용이 가능 하다.
+또한 APF에서 PF4J로 변경 하여 약 4000KB resource를 80KB로 감량 할수 있었다.
 많은 사용자분들이 PF4J를 활용하여, 필요에 맞춰 자유로운 Plugin을 개발 하였으면 한다.
