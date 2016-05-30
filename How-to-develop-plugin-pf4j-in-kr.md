@@ -6,8 +6,7 @@ Plugin Framework for Java (PF4J)개발방법
 
 도입 배경
 =======
-ngrinder는 Atlassian Plugin Framework(APF)를 제공하여
-각 사용자들의 필요에 맞도록 plugin을 개발을 도모 하였으나,
+opensource인 nGridner는 외부 개발자도 참여 가능하도록 Atlassian Plugin Framework(APF)를 제공하여 각 사용자들의 필요에 맞도록 plugin을 개발을 도모 하였으나,
 그 활용도가 미미하여 접근하기 쉬운 Plugin Framework for Java (PF4J)를 nGridner 3.4 버전부터 채택 하였다.
 
 * PF4J 소개 : https://github.com/decebals/pf4j
@@ -16,7 +15,7 @@ ngrinder는 Atlassian Plugin Framework(APF)를 제공하여
 * jvm monitor repo : 이건 현재 제 개인 github에만 올라가 있습니다. 이건 어떻게 할까요?
 
 개발 방법
-======
+=======
 
   1. nGrinder는 사용자들이 필요에 맞춰 자유로운 Plugin을 개발할 수 있도록 아래와 같은 확장 포인터들을 제공하고 있다.
  https://github.com/songeunwoo/ngrinder/wiki/How-to-develop-plugin
@@ -139,7 +138,6 @@ ngrinder는 Atlassian Plugin Framework(APF)를 제공하여
 customizing for ngrinder
 ========================
   1. 의존성주입
-
     - ngrinder-controller와 ngrinder-core 프로젝트간에 의존성 주입 문제를 해결 하고자 pf4j-spring을 추가적으로 사용하였다.
     ```xml
       <dependency>
@@ -184,23 +182,12 @@ customizing for ngrinder
     ```
 
   2. JAR파일 지원
-
     - 기존 PF4J는 컴파일된 폴더 파일 형식만 읽도록 되어 있었다. nGrinder에서는 개발의 편의성을 위하여 JAR파일을 읽을수 있도록 개선 하였다.
     pf4j의 AbstractExtensionFinder를 상속받아 NGrinderDefaultExtensionFinder에서 구현 하였으며,
     readPluginsStorages()에서 findResource를 찾을때에는 @Extension 어노테이션을 주어 생성해 놓은 "META-INF/extensions.idx" 파일을 참조 하였다.
     ```java
-    public class NGrinderServiceProviderExtensionFinder extends AbstractExtensionFinder {
-
-    	private final String EXTENSIONS_RESOURCE_PATH = "META-INF/extensions.idx";
-
-    	public NGrinderServiceProviderExtensionFinder(PluginManager pluginManager) {
-    		super(pluginManager);
-    	}
-
-    	@Override
-      public Map<String, Set<String>> readClasspathStorages() {
-  		    return new LinkedHashMap<String, Set<String>>();
-      }
+      ....
+      private final String EXTENSIONS_RESOURCE_PATH = "META-INF/extensions.idx";
 
       @Override
       public Map<String, Set<String>> readPluginsStorages() {
@@ -213,56 +200,36 @@ customizing for ngrinder
               log.debug("Reading extensions storages for plugin '{}'", pluginId);
               final Set<String> bucket = new HashSet<String>();
 
-              try {
-                  URL url = ((PluginClassLoader) plugin.getPluginClassLoader()).findResource(EXTENSIONS_RESOURCE_PATH);
-                  if (url != null) {
-                      Path extensionPath;
-                      if (url.toURI().getScheme().equals("jar")) {
-                          FileSystem fileSystem = FileSystems.newFileSystem(url.toURI(), Collections.<String, Object>emptyMap());
-                          extensionPath = fileSystem.getPath(EXTENSIONS_RESOURCE_PATH);
-                      } else {
-                          extensionPath = Paths.get(url.toURI());
-                      }
-                      Files.walkFileTree(extensionPath, Collections.<FileVisitOption>emptySet(), 1, new SimpleFileVisitor<Path>() {
-
-                          @Override
-                          public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                              log.debug("Read '{}'", file);
-                              Reader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8);
-                              ServiceProviderExtensionStorage.read(reader, bucket);
-                              return FileVisitResult.CONTINUE;
-                          }
-
-                      });
+              URL url = ((PluginClassLoader) plugin.getPluginClassLoader()).findResource(EXTENSIONS_RESOURCE_PATH);
+              if (url != null) {
+                  Path extensionPath;
+                  if (url.toURI().getScheme().equals("jar")) {
+                      FileSystem fileSystem = FileSystems.newFileSystem(url.toURI(), Collections.<String, Object>emptyMap());
+                      extensionPath = fileSystem.getPath(EXTENSIONS_RESOURCE_PATH);
                   } else {
-                      log.debug("Cannot find '{}'", EXTENSIONS_RESOURCE_PATH);
+                      extensionPath = Paths.get(url.toURI());
                   }
+                  Files.walkFileTree(extensionPath, Collections.<FileVisitOption>emptySet(), 1, new SimpleFileVisitor<Path>() {
 
-                  if (bucket.isEmpty()) {
-                      log.debug("No extensions found");
-                  } else {
-                      log.debug("Found possible {} extensions:", bucket.size());
-                      for (String entry : bucket) {
-                          log.debug("   " + entry);
+                      @Override
+                      public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                          log.debug("Read '{}'", file);
+                          Reader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8);
+                          ServiceProviderExtensionStorage.read(reader, bucket);
+                          return FileVisitResult.CONTINUE;
                       }
-                  }
 
-                  result.put(pluginId, bucket);
-              } catch (IOException e) {
-                  log.error(e.getMessage(), e);
-              } catch (URISyntaxException e) {
-              	log.error(e.getMessage(), e);
-  			      }
-          }
-
-          return result;
-      }
-
-    }
+                  });
+              } else {
+                  log.debug("Cannot find '{}'", EXTENSIONS_RESOURCE_PATH);
+              }
+            ....
     ```
 
 
 마치며..
-====
+======
 
+기존 Atlassian Plugin Framework(APF)를 사용할 때에는 atlas-package 라는 별도의 빌드 방식으로 comfile을 해야하는 어려움이 있었지만, PF4J는 기존 maven빌드 방식 그대로 사용이 가능 하다.
+또한 APF에서 PF4J로 변경 하여 약 4000KB resource를 80KB로 감량 할수 있었다. 
 많은 사용자분들이 PF4J를 활용하여, 필요에 맞춰 자유로운 Plugin을 개발 하였으면 한다.
