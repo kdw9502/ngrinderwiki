@@ -14,6 +14,34 @@ opensource인 nGridner는 외부 개발자도 참여 가능하도록 Atlassian P
 * networkoverflow repo : https://github.com/naver/ngrinder-networkoverflow
 * jvm monitor repo : 이건 현재 제 개인 github에만 올라가 있습니다. 이건 어떻게 할까요?
 
+PF4J 흐름도
+=========
+* 아래 이미지는 전반적인 흐름도를 나타내었다.
+
+![mindmap](https://raw.githubusercontent.com/wiki/naver/ngrinder/assets/pf4j-roadmap.png)
+
+* 아래 소스 코드는 OnLoginRunnable을 구현한 plugin을 호출하여 처리를 해주는 부분이다.
+```java
+....
+  @Autowired
+	private PluginManager pluginManager;
+
+  @Override
+	public UserDetails loadUserByUsername(String userId) {
+		for (OnLoginRunnable each : getPluginManager().getEnabledModulesByClass(OnLoginRunnable.class, defaultPlugin)) {
+			User user = each.loadUser(userId);
+			if (user != null) {
+			  .....
+      	return new SecuredUser(user, user.getAuthProviderClass());
+			}
+		}
+	}
+....
+```
+
+* PluginManager :  https://github.com/naver/ngrinder/blob/master/ngrinder-controller/src/main/java/org/ngrinder/infra/plugin/PluginManager.java
+
+
 개발 방법
 =======
 
@@ -50,7 +78,20 @@ opensource인 nGridner는 외부 개발자도 참여 가능하도록 Atlassian P
     ```
     target/classes/META-INF/MANIFEST.MF
     ```
-    - 빌드 설정은 아래와 같이 JAR파일로 해준다.
+    - 기재 되어있는 정보는 아래와 같다.
+    ```
+    Manifest-Version: 1.0
+    plugin-Id: siteminder-sso
+    Archiver-Version: Plexus Archiver
+    Built-By: NAVER
+    plugin-Provider: NAVER
+    plugin-Version: 4.0.0
+    plugin-Dependencies:
+    plugin-Class: org.ngrinder.sso.SiteminderSSOPlugin
+    Created-By: Apache Maven 3.0.5
+    Build-Jdk: 1.8.0_91
+    ```
+    - pom.xml 빌드 설정은 아래와 같이 JAR파일로 해주며, manifestEntries 설정은 아래를 참고하면 된다.
     ```xml
       <properties>
           <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -67,35 +108,16 @@ opensource인 nGridner는 외부 개발자도 참여 가능하도록 Atlassian P
           <plugins>
               <plugin>
                   <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-antrun-plugin</artifactId>
-                  <version>1.6</version>
-                  <executions>
-                      <execution>
-                          <id>unzip jar file</id>
-                          <phase>package</phase>
-                          <configuration>
-                              <target>
-                                  <unzip src="target/${artifactId}-${version}.${packaging}" dest="target/classes" />
-                              </target>
-                          </configuration>
-                          <goals>
-                              <goal>run</goal>
-                          </goals>
-                      </execution>
-                  </executions>
-              </plugin>
-              <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
                   <artifactId>maven-jar-plugin</artifactId>
                   <version>2.4</version>
                   <configuration>
                       <archive>
                           <manifestEntries>
-                              <Plugin-Id>${plugin.id}</Plugin-Id>
-                              <Plugin-Class>${plugin.class}</Plugin-Class>
-                              <Plugin-Version>${plugin.version}</Plugin-Version>
-                              <Plugin-Provider>${plugin.provider}</Plugin-Provider>
-                              <Plugin-Dependencies>${plugin.dependencies}</Plugin-Dependencies>
+                              <plugin-Id>${plugin.id}</plugin-Id>
+                              <plugin-Class>${plugin.class}</plugin-Class>
+                              <plugin-Version>${plugin.version}</plugin-Version>
+                              <plugin-Provider>${plugin.provider}</plugin-Provider>
+                              <plugin-Dependencies>${plugin.dependencies}</plugin-Dependencies>
                           </manifestEntries>
                       </archive>
                   </configuration>
@@ -105,20 +127,26 @@ opensource인 nGridner는 외부 개발자도 참여 가능하도록 Atlassian P
     ```
 
   4. 코드 작성시
-    - 코드 작성시에는 PF4J plugin을 상속 받아준후 생성자로 PluginWrapper를 주입해 준다.
+    - 코드 작성시에는 PF4J plugin을 상속 받아준후 생성자로 PluginWrapper를 주입해 준다. 추가적으로 ngrinder-core project는 Maven Multi Module Project로 구성이 되어 있으므로
+    createApplicationContext()는 null을 반환해 준다. ApplicationContext는 의존성 주입파트에서 다시 설명 하곘다.
     ```java
-      public class UserLogin extends Plugin {
+      public class NetworkOverFlow extends SpringPlugin {
 
-          public UserLogin(PluginWrapper wrapper) {
-              super(wrapper);
-          }
+        public NetworkOverFlow(PluginWrapper wrapper) {
+          super(wrapper);
+        }
+
+        @Override
+        protected ApplicationContext createApplicationContext() {
+          return null;
+        }
 
       }
     ```
     - 내부 클레스로 ngrinder-core의 확장 포인터들 중에서 구현하고자 하는 코드를 구현 한 후 @Extension 어노테이션을 주어 PF4J 컴파일시에 인덱스 될수 있도록 해준다.
     ```java
         @Extension
-        public static class UserLoginExtension implements OnLoginRunnable {
+        public static class NetworkOverFlowExtension implements OnTestSamplingRunnable {
 
             @Override
             public User loadUser(final String userId) {
@@ -127,7 +155,7 @@ opensource인 nGridner는 외부 개발자도 참여 가능하도록 Atlassian P
 
         }
     ```
-    - 인덱싱된 파일 정보는 아래 경로에서 확인 가능 하다.
+    - 인덱싱된 파일 정보는 아래 경로에서 확인 가능 하다. loadPlugins시 해당 정보를 참고하여 load가 된다.
     ```
     target/classes/META-INF/extensions.idx
     ```
@@ -146,40 +174,41 @@ customizing for ngrinder
           <version>0.2.0</version>
   		</dependency>
     ```
-    - pf4j-spring의 SpringExtensionFactory를 상속받아 ngrinder의 ApplicationContext를 주입하여 사용할수 있었다.
-    ```java
-    @Component
-    public class NGrinderSpringExtensionFactory extends SpringExtensionFactory {
+    - pf4j-spring의 SpringExtensionFactory를 상속받아 ngrinder의 ApplicationContext를 주입하여 사용하였다.
 
-      private final PluginManager pluginManager;
+      ```java
+      @Component
+      public class NGrinderSpringExtensionFactory extends SpringExtensionFactory {
 
-      @Autowired
-      private ApplicationContext applicationContext;
+        private final PluginManager pluginManager;
 
-      @Autowired
-      public NGrinderSpringExtensionFactory(PluginManager pluginManager) {
-      	super(pluginManager);
-      	this.pluginManager = pluginManager;
+        @Autowired
+        private ApplicationContext applicationContext;
+
+        @Autowired
+        public NGrinderSpringExtensionFactory(PluginManager pluginManager) {
+        	super(pluginManager);
+        	this.pluginManager = pluginManager;
+        }
+
+        protected void setApplicationContext(ApplicationContext applicationContext) {
+        	this.applicationContext = applicationContext;
+        }
+
+        @Override
+        public Object create(Class<?> extensionClass) {
+        	Object extension = createWithoutSpring(extensionClass);
+        	if (extension != null) {
+        		PluginWrapper pluginWrapper = pluginManager.whichPlugin(extensionClass);
+        		if (pluginWrapper != null) {
+                applicationContext.getAutowireCapableBeanFactory().autowireBean(extension);
+        		}
+        	}
+        	return extension;
+        }
+
       }
-
-      protected void setApplicationContext(ApplicationContext applicationContext) {
-      	this.applicationContext = applicationContext;
-      }
-
-      @Override
-      public Object create(Class<?> extensionClass) {
-      	Object extension = createWithoutSpring(extensionClass);
-      	if (extension != null) {
-      		PluginWrapper pluginWrapper = pluginManager.whichPlugin(extensionClass);
-      		if (pluginWrapper != null) {
-              applicationContext.getAutowireCapableBeanFactory().autowireBean(extension);
-      		}
-      	}
-      	return extension;
-      }
-
-    }
-    ```
+      ```
 
   2. JAR파일 지원
     - 기존 PF4J는 컴파일된 폴더 파일 형식만 읽도록 되어 있었다. nGrinder에서는 개발의 편의성을 위하여 JAR파일을 읽을수 있도록 개선 하였다.
@@ -225,6 +254,10 @@ customizing for ngrinder
               }
             ....
     ```
+
+
+
+
 
 
 마치며..
