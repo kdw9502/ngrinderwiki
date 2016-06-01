@@ -12,7 +12,7 @@ opensource인 nGridner는 외부 개발자도 참여 가능하도록 Atlassian P
 * PF4J 소개 : https://github.com/decebals/pf4j
 * login plugin repo : https://github.com/naver/ngrinder-siteminder-sso
 * networkoverflow repo : https://github.com/naver/ngrinder-networkoverflow
-* jvm monitor repo : 이건 현재 제 개인 github에만 올라가 있습니다. 이건 어떻게 할까요?
+* jvm monitor repo : https://github.com/songeunwoo/ngrinder-jvm-monitor-plugin 
 
 PF4J 흐름도
 =========
@@ -21,6 +21,7 @@ PF4J 흐름도
 ![mindmap](https://raw.githubusercontent.com/wiki/naver/ngrinder/assets/pf4j-roadmap.png)
 
 * 아래 소스 코드는 OnLoginRunnable을 구현한 plugin을 호출하여 처리를 해주는 부분이다.
+
 ```java
 ....
   @Autowired
@@ -92,6 +93,7 @@ PF4J 흐름도
     Build-Jdk: 1.8.0_91
     ```
     - pom.xml 빌드 설정은 아래와 같이 JAR파일로 해주며, manifestEntries 설정은 아래를 참고하면 된다.
+
     ```xml
       <properties>
           <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -129,6 +131,7 @@ PF4J 흐름도
   4. 코드 작성시
     - 코드 작성시에는 PF4J plugin을 상속 받아준후 생성자로 PluginWrapper를 주입해 준다. 추가적으로 ngrinder-core project는 Maven Multi Module Project로 구성이 되어 있으므로
     createApplicationContext()는 null을 반환해 준다. ApplicationContext는 의존성 주입파트에서 다시 설명 하곘다.
+
     ```java
       public class NetworkOverFlow extends SpringPlugin {
 
@@ -143,6 +146,7 @@ PF4J 흐름도
 
       }
     ```
+
     - 내부 클레스로 ngrinder-core의 확장 포인터들 중에서 구현하고자 하는 코드를 구현 한 후 @Extension 어노테이션을 주어 PF4J 컴파일시에 인덱스 될수 있도록 해준다.
     ```java
         @Extension
@@ -155,7 +159,9 @@ PF4J 흐름도
 
         }
     ```
+
     - 인덱싱된 파일 정보는 아래 경로에서 확인 가능 하다. loadPlugins시 해당 정보를 참고하여 load가 된다.
+
     ```
     target/classes/META-INF/extensions.idx
     ```
@@ -176,45 +182,73 @@ customizing for ngrinder
     ```
     - pf4j-spring의 SpringExtensionFactory를 상속받아 ngrinder의 ApplicationContext를 주입하여 사용하였다.
 
-      ```java
-      @Component
-      public class NGrinderSpringExtensionFactory extends SpringExtensionFactory {
-
-        private final PluginManager pluginManager;
-
-        @Autowired
-        private ApplicationContext applicationContext;
-
-        @Autowired
-        public NGrinderSpringExtensionFactory(PluginManager pluginManager) {
-        	super(pluginManager);
-        	this.pluginManager = pluginManager;
-        }
-
-        protected void setApplicationContext(ApplicationContext applicationContext) {
-        	this.applicationContext = applicationContext;
-        }
-
+    ```java
+        pf4j-spring -  SpringExtensionFactory
+        .......
         @Override
         public Object create(Class<?> extensionClass) {
-        	Object extension = createWithoutSpring(extensionClass);
-        	if (extension != null) {
-        		PluginWrapper pluginWrapper = pluginManager.whichPlugin(extensionClass);
-        		if (pluginWrapper != null) {
-                applicationContext.getAutowireCapableBeanFactory().autowireBean(extension);
-        		}
-        	}
-        	return extension;
-        }
+            Object extension = createWithoutSpring(extensionClass);
+            if (autowire && extension != null) {
+                // test for SpringBean
+                PluginWrapper pluginWrapper = pluginManager.whichPlugin(extensionClass);
+                if (pluginWrapper != null) {
+                    Plugin plugin = pluginWrapper.getPlugin();
+                    if (plugin instanceof SpringPlugin) {
+                        // autowire
+                        ApplicationContext pluginContext = ((SpringPlugin) plugin).getApplicationContext();
+                        pluginContext.getAutowireCapableBeanFactory().autowireBean(extension);
+                    }
+                }
+            }
 
+            return extension;
+        }
+        ......
+    ```
+
+      아래는 Override 해준 코드이다.
+
+    ```java
+    @Component
+    public class NGrinderSpringExtensionFactory extends SpringExtensionFactory {
+
+      private final PluginManager pluginManager;
+
+      @Autowired
+      private ApplicationContext applicationContext;
+
+      @Autowired
+      public NGrinderSpringExtensionFactory(PluginManager pluginManager) {
+      	super(pluginManager);
+      	this.pluginManager = pluginManager;
       }
-      ```
+
+      protected void setApplicationContext(ApplicationContext applicationContext) {
+      	this.applicationContext = applicationContext;
+      }
+
+      @Override
+      public Object create(Class<?> extensionClass) {
+      	Object extension = createWithoutSpring(extensionClass);
+      	if (extension != null) {
+      		PluginWrapper pluginWrapper = pluginManager.whichPlugin(extensionClass);
+      		if (pluginWrapper != null) {
+              applicationContext.getAutowireCapableBeanFactory().autowireBean(extension);
+      		}
+      	}
+      	return extension;
+      }
+
+    }
+    ```
 
   2. JAR파일 지원
     - 기존 PF4J는 컴파일된 폴더 파일 형식만 읽도록 되어 있었다. nGrinder에서는 개발의 편의성을 위하여 JAR파일을 읽을수 있도록 개선 하였다.
-    pf4j의 AbstractExtensionFinder를 상속받아 NGrinderDefaultExtensionFinder에서 구현 하였으며,
-    readPluginsStorages()에서 findResource를 찾을때에는 @Extension 어노테이션을 주어 생성해 놓은 "META-INF/extensions.idx" 파일을 참조 하였다.
+
+        pf4j의 AbstractExtensionFinder를 상속받아 NGrinderDefaultExtensionFinder에서 구현 하였으며,readPluginsStorages()에서 findResource를 찾을때에는 @Extension 어노테이션을 주어 생성해 놓은 "META-INF/extensions.idx" 파일을 참조 하였다.
+
     ```java
+      NGrinderServiceProviderExtensionFinder
       ....
       private final String EXTENSIONS_RESOURCE_PATH = "META-INF/extensions.idx";
 
@@ -263,6 +297,8 @@ customizing for ngrinder
 마치며..
 ======
 
->기존 Atlassian Plugin Framework(APF)를 사용할 때에는 atlas-package 라는 별도의 빌드 방식으로 comfile을 해야하는 어려움이 있었지만, PF4J는 기존 maven빌드 방식 그대로 사용이 가능 하다.
-또한 APF에서 PF4J로 변경 하여 약 4000KB resource를 80KB로 감량 할수 있었다.
-많은 사용자분들이 PF4J를 활용하여, 필요에 맞춰 자유로운 Plugin을 개발 하였으면 한다.
+  - 기존 Atlassian Plugin Framework(APF)를 사용할 때에는 atlas-package 라는 별도의 빌드 방식으로 comfile을 해야하는 어려움이 있었지만, PF4J는 기존 maven빌드 방식 그대로 사용이 가능 하다.
+  - APF에서 PF4J로 변경 하여 약 4000KB resource를 80KB로 감량 할수 있었다.
+  - 추가적으로 pf4j-update 도 같이 소개한다. 운영하시는 분들에게 유용한 기술이다.
+    https://github.com/decebals/pf4j-update
+  - 많은 사용자분들이 PF4J를 활용하여, 필요에 맞춰 자유로운 Plugin을 개발 하였으면 한다.
