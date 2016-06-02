@@ -6,13 +6,14 @@ Plugin Framework for Java (PF4J)개발방법
 
 도입 배경
 =======
-opensource인 nGridner는 외부 개발자도 참여 가능하도록 Atlassian Plugin Framework(APF)를 제공하여 각 사용자들의 필요에 맞도록 plugin을 개발을 도모 하였으나,
-그 활용도가 미미하여 접근하기 쉬운 Plugin Framework for Java (PF4J)를 nGridner 3.4 버전부터 채택 하였다.
+opensource인 nGrinder는 외부 개발자도 참여 가능하도록 Atlassian Plugin Framework(APF)를 제공하여 각 사용자들의 필요에 맞도록 plugin을 개발을 도모 하였으나,
+그 활용도가 미미하여 접근하기 쉬운 Plugin Framework for Java (PF4J)를 nGrinder 3.4 버전부터 채택 하였다.
 
 * PF4J 소개 : https://github.com/decebals/pf4j
+* PF4J-UPDATE : https://github.com/decebals/pf4j-update
 * login plugin repo : https://github.com/naver/ngrinder-siteminder-sso
 * networkoverflow repo : https://github.com/naver/ngrinder-networkoverflow
-* jvm monitor repo : https://github.com/songeunwoo/ngrinder-jvm-monitor-plugin 
+* jvm monitor repo : https://github.com/songeunwoo/ngrinder-jvm-monitor-plugin
 
 PF4J 흐름도
 =========
@@ -180,66 +181,67 @@ customizing for ngrinder
           <version>0.2.0</version>
   		</dependency>
     ```
+
     - pf4j-spring의 SpringExtensionFactory를 상속받아 ngrinder의 ApplicationContext를 주입하여 사용하였다.
 
     ```java
-        pf4j-spring -  SpringExtensionFactory
-        .......
-        @Override
-        public Object create(Class<?> extensionClass) {
-            Object extension = createWithoutSpring(extensionClass);
-            if (autowire && extension != null) {
-                // test for SpringBean
-                PluginWrapper pluginWrapper = pluginManager.whichPlugin(extensionClass);
-                if (pluginWrapper != null) {
-                    Plugin plugin = pluginWrapper.getPlugin();
-                    if (plugin instanceof SpringPlugin) {
-                        // autowire
-                        ApplicationContext pluginContext = ((SpringPlugin) plugin).getApplicationContext();
-                        pluginContext.getAutowireCapableBeanFactory().autowireBean(extension);
-                    }
-                }
-            }
+          pf4j-spring -  SpringExtensionFactory
+          .......
+          @Override
+          public Object create(Class<?> extensionClass) {
+              Object extension = createWithoutSpring(extensionClass);
+              if (autowire && extension != null) {
+                  // test for SpringBean
+                  PluginWrapper pluginWrapper = pluginManager.whichPlugin(extensionClass);
+                  if (pluginWrapper != null) {
+                      Plugin plugin = pluginWrapper.getPlugin();
+                      if (plugin instanceof SpringPlugin) {
+                          // autowire
+                          ApplicationContext pluginContext = ((SpringPlugin) plugin).getApplicationContext();
+                          pluginContext.getAutowireCapableBeanFactory().autowireBean(extension);
+                      }
+                  }
+              }
 
-            return extension;
-        }
-        ......
+              return extension;
+          }
+          ......
     ```
 
-      아래는 Override 해준 코드이다.
+        아래는 Override 해준 코드이다.
 
     ```java
-    @Component
-    public class NGrinderSpringExtensionFactory extends SpringExtensionFactory {
+      @Component
+      public class NGrinderSpringExtensionFactory extends SpringExtensionFactory {
 
-      private final PluginManager pluginManager;
+        private final PluginManager pluginManager;
 
-      @Autowired
-      private ApplicationContext applicationContext;
+        @Autowired
+        private ApplicationContext applicationContext;
 
-      @Autowired
-      public NGrinderSpringExtensionFactory(PluginManager pluginManager) {
-      	super(pluginManager);
-      	this.pluginManager = pluginManager;
+        @Autowired
+        public NGrinderSpringExtensionFactory(PluginManager pluginManager) {
+        	super(pluginManager);
+        	this.pluginManager = pluginManager;
+        }
+
+        protected void setApplicationContext(ApplicationContext applicationContext) {
+        	this.applicationContext = applicationContext;
+        }
+
+        @Override
+        public Object create(Class<?> extensionClass) {
+        	Object extension = createWithoutSpring(extensionClass);
+        	if (extension != null) {
+        		PluginWrapper pluginWrapper = pluginManager.whichPlugin(extensionClass);
+        		if (pluginWrapper != null) {
+                applicationContext.getAutowireCapableBeanFactory().autowireBean(extension);
+        		}
+        	}
+        	return extension;
+        }
+
       }
-
-      protected void setApplicationContext(ApplicationContext applicationContext) {
-      	this.applicationContext = applicationContext;
-      }
-
-      @Override
-      public Object create(Class<?> extensionClass) {
-      	Object extension = createWithoutSpring(extensionClass);
-      	if (extension != null) {
-      		PluginWrapper pluginWrapper = pluginManager.whichPlugin(extensionClass);
-      		if (pluginWrapper != null) {
-              applicationContext.getAutowireCapableBeanFactory().autowireBean(extension);
-      		}
-      	}
-      	return extension;
-      }
-
-    }
     ```
 
   2. JAR파일 지원
@@ -299,6 +301,4 @@ customizing for ngrinder
 
   - 기존 Atlassian Plugin Framework(APF)를 사용할 때에는 atlas-package 라는 별도의 빌드 방식으로 comfile을 해야하는 어려움이 있었지만, PF4J는 기존 maven빌드 방식 그대로 사용이 가능 하다.
   - APF에서 PF4J로 변경 하여 약 4000KB resource를 80KB로 감량 할수 있었다.
-  - 추가적으로 pf4j-update 도 같이 소개한다. 운영하시는 분들에게 유용한 기술이다.
-    https://github.com/decebals/pf4j-update
   - 많은 사용자분들이 PF4J를 활용하여, 필요에 맞춰 자유로운 Plugin을 개발 하였으면 한다.
