@@ -11,9 +11,8 @@ opensource인 nGrinder는 외부 개발자도 참여 가능하도록 Atlassian P
 
 * PF4J 소개 : https://github.com/decebals/pf4j
 * PF4J-UPDATE : https://github.com/decebals/pf4j-update
-* login plugin repo : https://github.com/naver/ngrinder-siteminder-sso
-* networkoverflow repo : https://github.com/naver/ngrinder-networkoverflow
-* jvm monitor repo : https://github.com/songeunwoo/ngrinder-jvm-monitor-plugin
+* ngrinder-plugins : https://github.com/naver/ngrinder-plugins
+
 
 PF4J 흐름도
 =========
