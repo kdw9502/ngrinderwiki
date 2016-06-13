@@ -17,11 +17,20 @@ Receiving objects: 1% (364/26998), 76.00 KiB | 10 KiB/s
 It may takes several minutes to do this.
 ```
 $ ls ngrinder/
-checkstyle.xml docs ngrinder-core ngrinder-dns ngrinder-controller
-README.md pom.xml release_note.txt
+docs docker ngrinder-core ngrinder-dns ngrinder-controller
+README.md pom.xml release_note.txt ....
 ```
-
 Look ! nGrinder codes already in Local !
+
+and Run scripts for the dependent libraries download.
+```
+// linux user
+$ install_maven_lib.sh
+
+// windows user
+$ install_maven_lib.bat
+```
+Now I just need built over.
 
 ### 2. Build nGrinder
 Let`s start using Maven to build an nGrinder project. It is quite simple !
