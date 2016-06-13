@@ -24,6 +24,8 @@ Look ! nGrinder codes already in Local !
 
 and Run scripts for the dependent libraries download.
 ```
+$ cd ngrinder
+
 // linux user
 $ install_maven_lib.sh
 
