@@ -221,7 +221,7 @@ package org.ngrinder;
       @BeforeProcess
       public static void beforeProcess() {
           test = new GTest(1, "Test1")
-          sql = sql.newInstance( 'connection_string', 'id', 'password', 'cubrid.jdbc.driver.CUBRIDDriver' )
+          sql = Sql.newInstance( 'connection_string', 'id', 'password', 'cubrid.jdbc.driver.CUBRIDDriver' )
           test.record(sql);
           grinder.logger.info("before process.");
       }
