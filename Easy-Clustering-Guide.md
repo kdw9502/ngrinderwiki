@@ -8,7 +8,7 @@ From nGrinder 3.3, nGrinder support "easy" clustering mode which let multiple co
 
 ### Run Controllers
 1. Run controllers pointing different web(-p)/cluster(-clp)/controller(-cp) port and region name(-r). If they're over-wrapped,  the controllers fail to run due to the port conflict.  
-   ```
+```
 java -jar -XX:MaxPermSize=200m -jar ngrinder-controller-X.X.war -p 8080 -cm easy -clp 10010 -r region1 -cp 9001      
 
 java -jar -XX:MaxPermSize=200m -jar ngrinder-controller-X.X.war -p 8081 -cm easy -clp 10011 -r region2 -cp 9002       
