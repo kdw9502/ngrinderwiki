@@ -33,10 +33,9 @@ If you prefer to run in docker. Please see https://hub.docker.com/r/ngrinder/con
    java -XX:MaxPermSize=200m -jar  ngrinder-controller-3.4.war
    ```
 4. By default, nGrinder uses 8080 for web server port. If you want to use the other port, please assign --port port_number as a parameter.
-```
-java -XX:MaxPermSize=200m -jar  ngrinder-controller-3.4.war --port 80
-
-```
+   ```
+   java -XX:MaxPermSize=200m -jar  ngrinder-controller-3.4.war --port 80
+   ```
 5. While executing the war file, the war will be extracted into ~/.ngrinder/webapp folder and creates serveral default data files like DBs into .ngrinder folder.
 6. If you can see the following logs in the screen, The ngridner controller is now ready to run.
 ```
@@ -100,33 +99,33 @@ See Private Agent for details.
    3. If it exists, just run with existing configuration in ~/.ngrinder_agent/agent.conf.
 5. If you like to overwrite the existing configuration with latest configuration, please put ‘-o‘ option as a parameter  
    ```
-run_agent.sh -o # for linux / mac
+   run_agent.sh -o # for linux / mac
 
-run_agent_bg.sh -o # If you want to run it in the background for linux / mac
-```
+   run_agent_bg.sh -o # If you want to run it in the background for linux / mac
+   ```
    or
    ```
-run_agent.bat –o # for windows
-```
+   run_agent.bat –o # for windows
+   ```
 6. If you want to stop the agent.  
    ```
-stop_agent.sh # for linux / mac
-```
+   stop_agent.sh # for linux / mac
+   ```
 
    or
    ```
-stop_agent.bat # for windows
-```
+   stop_agent.bat # for windows
+   ```
 7. From nGrinder 3.3, the connected agent is automatically approved by controller. However if you provided  
    ```
-controller.enable_agent_auto_approval=true
-```
+   controller.enable_agent_auto_approval=true
+   ```
 
    configuration in the controller configuration, You have to approve agents by yourself.
 8. To approve agents, go to Agent Management menu and click the approve button.
    ![](assets/Installation-Guide-aef57.png)
 9. If you run an agent in Linux, you may need to configure ulimit to run many threads. please check followings.
-   ```
+```
 > ulimit -a
 
 core file size          (blocks, -c) 0
@@ -163,7 +162,7 @@ virtual memory          (kbytes, -v) unlimited
 file locks                      (-x) unlimited
 ```
    If your machine has small "max user processes" and "open files" entry when you run "ulimit -a", please make it at least over 10000. Open /etc/security/limits.conf file in the root account and add followings.
-   ```
+```
 your_account soft    nproc           32768
 
 your_account hard    nproc           32768
@@ -190,22 +189,22 @@ You can download monitors from the controller as well.
 ![](assets/Installation-Guide-96872.png)
 2. Then untar the monitor package and run the batch or shell files.
    ```
-run_monitor_bg.sh  # for linux / mac
-```
+   run_monitor_bg.sh  # for linux / mac
+   ```
 
    or
    ```
-run_monitor.bat # for windows
-```
+   run_monitor.bat # for windows
+   ```
 
 3. If you want to stop the monitor, run following commands.  
    ```
-stop_monitor.sh # for linux / mac
-```
+   stop_monitor.sh # for linux / mac
+   ```
 
    or
    ```
-stop_monitor.bat –o # for windows
-```
+   stop_monitor.bat –o # for windows
+   ```
 
 OK. Now you're ready to run the first performance test. Go to [[Quick Start]]
