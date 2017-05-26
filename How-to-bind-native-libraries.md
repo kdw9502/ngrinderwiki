@@ -9,7 +9,7 @@ The followings describes the step necessary to run so or dlls with nGrinder.
 2. Upload the created DLLs or SOs into lib folder. If you will define the script in the helloworld/TestRunner.groovy, you should upload those native libraries in the helloworld/lib/ folder.
 3. Write the test script using JNA binding. Following show the simple binding between the groovy script and native lib named “dmclient”
 
-   ```groovy
+```groovy
 package org.ngrinder;
 
 // import JNA
