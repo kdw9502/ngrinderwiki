@@ -7,15 +7,15 @@ nGrinder is the web application. In our company(Naver), more than 1000 users has
 2. Put the following option in the configuration editor.  
 
    ```
-controller.allow_sign_up=true
-```
+   controller.allow_sign_up=true
+   ```
 
    ![](assets/User-Sign-Up-a0abd.png)
    If you want to get the user email and mobile phone number when new users sign up. Please put the following as well.  
 
    ```
-controller.user_security=true
-```
+   controller.user_security=true
+   ```
    If it’s false, the users can register themselves without the email and mobile phone number.
 3. Log out and check if there is “Sign Up” link in the login page.  
    ![](assets/User-Sign-Up-4f74a.png)
