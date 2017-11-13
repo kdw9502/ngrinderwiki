@@ -20,7 +20,7 @@
 |perftest/api/{id}/perf|GET|dataType/ comma separated data type key / Y / - <br>onlyTotal / total only? / N / false<br>imgWidth /  image width / Y / -|Get the perftest graph data.|
 |perftest/api/{id}/monitor|GET|targetIP / test target IP / Y / - <br>imgWidth /  image width / Y / -|Get the monitor graph data|
 |perftest/api/{id}/plugin/{plugin}|GET|imgWidth /  image width / Y / -	|Get the plugin graph data|
-|perftest/api/{id}/clone_and_start|POST|Refer PerfTest model|cloen the given test and start|
+|perftest/api/{id}/clone_and_start|POST|Refer PerfTest model|clone the given test and start|
 
 ### Models
 PerfTest
