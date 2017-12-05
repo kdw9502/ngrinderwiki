@@ -13,7 +13,7 @@ You can download nGridner controller from the following link.
 - https://github.com/naver/ngrinder/releases
 
 ### Install Controller
-nGrinder is distributed as a self executable web archive file(WAR) file just like Jenkins, you can put this archive file into your familar web application server (like Tomcat) or run the package in the command line.  
+nGrinder is distributed as a self executable web archive file(WAR) file just like Jenkins, you can put this archive file into your familiar web application server (like Tomcat) or run the package in the command line.  
 **!Be careful, Never locate the war file in the space containing folder like "C:\Program Files\Tomcat\webapps\".**
 
 ### Run on Docker
@@ -36,7 +36,7 @@ If you prefer to run in docker. Please see https://hub.docker.com/r/ngrinder/con
    ```
    java -XX:MaxPermSize=200m -jar  ngrinder-controller-3.4.war --port 80
    ```
-5. While executing the war file, the war will be extracted into ~/.ngrinder/webapp folder and creates serveral default data files like DBs into .ngrinder folder.
+5. While executing the war file, the war will be extracted into ~/.ngrinder/webapp folder and creates several default data files like DBs into .ngrinder folder.
 6. If you can see the following logs in the screen, The ngridner controller is now ready to run.
 ```
 INFO 14. 1. 20 오후 4:39:liquibase: ChangeSet ngrinder_datachange_logfile/db.changelog_schema_22.xml::22::ngrinder.3.3 r
@@ -88,7 +88,7 @@ So just unpacking the tar file and running “run_agent.sh” or “run_agent.ba
    ![](assets/Installation-Guide-262d2.png)  
 
     >Because you’re logged in as admin, the downloadable agent package contains the configurations which let the agents shared by all user.  
-If you logged in as not admin account, the link is changed to “Download Private Agent” containning the configurations which let the agents only occupied by the current user.  
+If you logged in as not admin account, the link is changed to “Download Private Agent” containing the configurations which let the agents only occupied by the current user.  
 See Private Agent for details.
 
 3. The tar archive which contains agent will be downloaded soon.
@@ -97,7 +97,7 @@ See Private Agent for details.
    1. Check the ~/.ngrinder_agent folder and see the configuration(agent.conf) is there
    2. If it does not exist, copy the current folder’s \_\_agent.conf file into ~/.ngrinder_agent/agent.conf and load it.
    3. If it exists, just run with existing configuration in ~/.ngrinder_agent/agent.conf.
-5. If you like to overwrite the existing configuration with latest configuration, please put ‘-o‘ option as a parameter  
+5. If you like to overwrite the existing configuration with the latest configuration, please put ‘-o‘ option as a parameter  
    ```
    run_agent.sh -o # for linux / mac
 
@@ -116,7 +116,7 @@ See Private Agent for details.
    ```
    stop_agent.bat # for windows
    ```
-7. From nGrinder 3.3, the connected agent is automatically approved by controller. However if you provided  
+7. From nGrinder 3.3, the connected agent is automatically approved by controller. However, if you provided  
    ```
    controller.enable_agent_auto_approval=true
    ```
@@ -179,7 +179,7 @@ root         soft    nofile          16000
 
 root         hard    nofile          16000
 ```
->By default, the only one agent per machine is supported. However if you want to run multiple agents in a single machine, you have to configure some agent option. Please refer [[Agent Configuration Guide]].
+>By default, the only one agent per machine is supported. However, if you want to run multiple agents in a single machine, you have to configure some agent option. Please refer [[Agent Configuration Guide]].
 
 ### Install Monitor
 nGrinder Monitor is the subset of the agent package and is installed into target machine to collect system statistics(such as CPU, MEM and Network) under the loads.  
