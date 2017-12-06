@@ -19,7 +19,7 @@ nGrinder consists of two major components.
 	- Coordinates test processes.
 	- Collates and displays test statistics.
 	- Let user create and modify script .
-- Agent
+> - Agent
 	- Runs processes and threads that put loads on target machines when running in agent mode.
 	- Monitors target system performance (e.g.: CPU/memory) when running in monitor mode
 
