@@ -73,7 +73,7 @@ How to configure the clustering?
 - **GSon** :Gson is a Java library that can be used to convert Java Objects into its JSON representation, and vice versa.
 - **SVNKit Dav** : We use this for serving the underlying SVN content thought web.
 
-##Service Tier
+## Service Tier
 - **The Grinder** : Grinder is a java load Testing framework which nGrinder mainly use. Without Grinder, no nGrinder exists
 - **Atlassian Plugin Framework** :We use this framework to make the plugin development easier. It's not so heavy weighted and easy to use!
 - **Spring**  : Spring Framework provides a comprehensive programming and configuration model for J2ee applications and nGrinder use as a its base architecture. At the first time, we thought Spring is too heavy to adopt. However we choose this because it's the most commonly used framework in our company(Naver) and it was easier to get the help from colleagues. Eventually we're convinced that we can not make nGrinder's rich functionality without highly configurable architecture Spring provides.
