@@ -35,8 +35,8 @@ In pom.xml, You can specify the additional library dependencies.
 
     <repositories>
         <repository>
-            <id>nhnopensource.maver.repo</id>
-            <url>https://github.com/nhnopensource/nhnopensource.maven.repo/raw/master/releases</url>
+            <id>ngrinder.maven.repo</id>
+            <url>https://github.com/naver/ngrinder/raw/ngrinder.maven.repo/releases</url>
         </repository>
     </repositories>
 
@@ -45,7 +45,7 @@ In pom.xml, You can specify the additional library dependencies.
         <dependency>
             <groupId>org.ngrinder</groupId>
             <artifactId>ngrinder-groovy</artifactId>
-            <version>3.4</version>
+            <version>${ngrinder.version}</version>
             <scope>provided</scope>
         </dependency>
 
