@@ -283,7 +283,6 @@ The [Plugin Framework for Java (PF4J)](https://github.com/pf4j/pf4j), which is e
         ```
 
 ## Conclusion
-======
 
   - When using the old Atlassian Plugin Framework (APF), there was difficulty in creating a compile with a separated build method called atlas-package, PF4J can be used in the existing maven build method.
   - We changed from APF to PF4J, and we were able to reduce resources about 4000KB to 80KB.
