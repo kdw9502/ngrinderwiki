@@ -1,26 +1,26 @@
-Plugin Framework for Java (PF4J) 개발방법
+How to develop Plugin Framework for Java (PF4J)
 =====================================
 
->이 문서는 한국 사용자들의 nGrinder PF4J plugin 개발 편의를 위해 작성 되었다.
->spring, java, maven으로 개발한다는 전재하에 작성 되었다.
+>This document was written for the convenience of development of nGrinder PF4J plugin for Korean users.
+>It was written under the premise of spring, java and maven development.
 
-도입 배경
-=======
-opensource인 nGrinder는 외부 개발자도 참여 가능하도록 Atlassian Plugin Framework(APF)를 제공하여 각 사용자들의 필요에 맞도록 plugin을 개발을 도모 하였으나,
-그 활용도가 미미하여 접근하기 쉬운 [Plugin Framework for Java (PF4J)](https://github.com/pf4j/pf4j)를 nGrinder 3.4 버전부터 채택 하였다.
+background of introduction
+==========================
+nGrinder, an opensource, has provided Atlassian Plugin Framework (APF) to enable external developers to participate,
+The [Plugin Framework for Java (PF4J)](https://github.com/pf4j/pf4j), which is easy to access due to its limited utilization, has been adopted from nGrinder 3.4.
 
-* PF4J 소개 : https://github.com/decebals/pf4j
+* About PF4J : https://github.com/decebals/pf4j
 * PF4J-UPDATE : https://github.com/decebals/pf4j-update
 * ngrinder-plugins : https://github.com/naver/ngrinder-plugins
 
 
-PF4J 흐름도
-=========
-* 아래 이미지는 전반적인 흐름도를 나타냅니다.
+PF4J Flow Chart
+================
+* The image below shows the overall flow chart.
 
 ![mindmap](https://raw.githubusercontent.com/wiki/naver/ngrinder/assets/pf4j-roadmap.png)
 
-* 아래 소스 코드는 ```OnLoginRunnable```을 구현한 plugin을 호출하여 처리를 해주는 부분이다.
+* The source code below is the part that processes by calling plugin which implements ```OnLoginRunnable```.
 
 ```java
 ....
@@ -43,16 +43,16 @@ PF4J 흐름도
 * PluginManager :  https://github.com/naver/ngrinder/blob/master/ngrinder-controller/src/main/java/org/ngrinder/infra/plugin/PluginManager.java
 
 
-개발 방법
-=======
+How to use
+===========
 
-1. nGrinder는 사용자들이 필요에 맞춰 자유로운 Plugin을 개발할 수 있도록 아래와 같은 확장 포인터들을 제공하고 있다.
+1. nGrinder provides the following expansion pointers to help users develop plugins that are free to meet their needs.
  https://github.com/naver/ngrinder/wiki/How-to-develop-plugin-extension-points
 
-2. pom.xml 설정
-    
-* nGrinder repository를 pom.xml에 추가해준다.
-    
+2. pom.xml setting
+
+* Add nGrinder repository to pom.xml.
+
 ```xml
       <repositories>
           ....
@@ -64,7 +64,7 @@ PF4J 흐름도
       </repositories>
 ```
 
-* 확장 포인터를 상속 받기 위해 ngrinder-core와 pf4j의 dependency를 추가한다.
+* Add ngrinder-core and pf4j Dependency to inherit the extended pointer.
 
 ```xml
       <dependency>
@@ -80,13 +80,13 @@ PF4J 흐름도
       </dependency>
 ```
 
-* pom.xml 파일에 해당 플러그인 검색을 위한 manifestEntries 설정 정보를 입력한다. 해당 입력 정보는 comfile시 아래 경로에서 확인할수 있다.
+* In the pom.xml file, enter the manifestEntries configuration information to search for the plugin. The input information can be checked in the path below in the comfile.
 
 ```
     target/classes/META-INF/MANIFEST.MF
 ```
 
-* 기재 되어있는 정보는 아래와 같다.
+* Add plug-in metadata to the MANIFEST.MF file.
 
 ```
     Manifest-Version: 1.0
@@ -101,47 +101,45 @@ PF4J 흐름도
     Build-Jdk: 1.8.0_91
 ```
 
-* pom.xml 빌드 설정은 아래와 같이 JAR파일로 해주며, manifestEntries 설정은 아래를 참고하면 된다.
+* The pom.xml build settings are set in JAR file as shown below, and the manifestEntries settings can be found below.
 
 ```xml
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
-        <ngrinder.core.version>3.4</ngrinder.core.version>
-        <plugin.id>siteminder-sso</plugin.id>
-        <plugin.class>org.ngrinder.sso.SiteminderSSOPlugin</plugin.class>
-        <plugin.version>1.0.0</plugin.version>
-        <plugin.provider>NAVER</plugin.provider>
-        <plugin.dependencies />
-    </properties>
+      <properties>
+          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+          <java.version>1.8</java.version>
+          <ngrinder.core.version>3.4</ngrinder.core.version>
+          <plugin.id>siteminder-sso</plugin.id>
+          <plugin.class>org.ngrinder.sso.SiteminderSSOPlugin</plugin.class>
+          <plugin.version>1.0.0</plugin.version>
+          <plugin.provider>NAVER</plugin.provider>
+          <plugin.dependencies />
+      </properties>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
-                <configuration>
-                    <archive>
-                        <manifestEntries>
-                            <plugin-Id>${plugin.id}</plugin-Id>
-                            <plugin-Class>${plugin.class}</plugin-Class>
-                            <plugin-Version>${plugin.version}</plugin-Version>
-                            <plugin-Provider>${plugin.provider}</plugin-Provider>
-                            <plugin-Dependencies>${plugin.dependencies}</plugin-Dependencies>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+      <build>
+          <plugins>
+              <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-jar-plugin</artifactId>
+                  <version>2.4</version>
+                  <configuration>
+                      <archive>
+                          <manifestEntries>
+                              <plugin-Id>${plugin.id}</plugin-Id>
+                              <plugin-Class>${plugin.class}</plugin-Class>
+                              <plugin-Version>${plugin.version}</plugin-Version>
+                              <plugin-Provider>${plugin.provider}</plugin-Provider>
+                              <plugin-Dependencies>${plugin.dependencies}</plugin-Dependencies>
+                          </manifestEntries>
+                      </archive>
+                  </configuration>
+              </plugin>
+          </plugins>
+      </build>
 ```
 
-3. PluginWrapper 주입
+3. PluginWrapper injection
     
-* 코드 작성시 PF4J plugin을 상속 받아준후 생성자로 PluginWrapper를 주입해 준다. 
-추가적으로 ngrinder-core project는 Maven Multi Module Project로 구성이 되어 있으므로
-createApplicationContext()는 null을 반환해 준다. ApplicationContext는 의존성 주입파트에서 다시 설명 하겠다.
+* Inherit PF4J plugin and inject PluginWrapper as the creator. And because ngrinder-core project Maven Multi Module Projects, createApplicationContext() returns null. I will explain ApplicationContext again in the Dependent Injection Part below.
 
 ```java
     public class NetworkOverFlow extends SpringPlugin {
@@ -158,10 +156,10 @@ createApplicationContext()는 null을 반환해 준다. ApplicationContext는 �
     }
 ```
 
-4. 확장 포인터 구현
+4. Deployment Extension Pointer
 
-    1) ngrinder-core 의 [확장 포인터들](https://github.com/naver/ngrinder/wiki/How-to-develop-plugin-extension-points) 중에서 구현하고자 하는 코드를 내부 클레스로 구현한다.
-    2) @Extension 어노테이션을 추가해 PF4J 컴파일시에 인덱스 될 수 있도록 해준다. 
+    1) Implement [nGrinder-core extension pointers](https://github.com/naver/ngrinder/wiki/How-to-develop-plugin-extension-points) with inner classes.
+    2) Add @Extension Annotation to make it indexable in PF4J compilation.
 
 ```java
     @Extension
@@ -175,17 +173,17 @@ createApplicationContext()는 null을 반환해 준다. ApplicationContext는 �
     }
 ```
 
-* 인덱싱된 파일은 ```target/classes/META-INF/extensions.idx```에서 확인이 가능 하다. 
-```PluginManager > loadPlugins()``` 에서 이 파일을 참고하기 위함이다.
+* Indexed files can be found in ``target/classes/META-INF/extensions.idx`. 
+Indexed file is refered by ```PluginManager > loadPlugins()```.
 
-5. 빌드후 생성된 jar파일을 ```.ngrinder/plugins``` 폴더에 넣어준 후 ngrinder를 재 시작 한다.
+5. After the build, put the generated jar file into the ```.ngrinder/plugins``` folder and restart the nGrinder.
 
 customizing for ngrinder
 ========================
 
-1. 의존성주입
+- Dependent injection
 
-* ngrinder-controller와 ngrinder-core 프로젝트간에 의존성 주입 문제를 해결을 위해 pf4j-spring을 추가적으로 사용하였다.
+* Additional pf4j-springs were used to solve the dependency injection problem between ngrinder-controller and ngrinder-core projects.
 
 ```xml
     <dependency>
@@ -195,7 +193,7 @@ customizing for ngrinder
     </dependency>
 ```
 
-* pf4j-spring의 SpringExtensionFactory를 상속받아 ngrinder의 ApplicationContext를 주입하여 사용하였다.
+* The SpringExtensionFactory of pf4j-spring was inherited and used by injecting ngrinder's ApplicationContext.
 
 ```java
     pf4j-spring -  SpringExtensionFactory
@@ -218,10 +216,10 @@ customizing for ngrinder
 
         return extension;
     }
-          ......
+    ......
 ```
 
-* 아래는 Override 해준 코드이다.
+* Override code
 
 ```java
     @Component
@@ -234,35 +232,32 @@ customizing for ngrinder
 
         @Autowired
         public NGrinderSpringExtensionFactory(PluginManager pluginManager) {
-            super(pluginManager);
-            this.pluginManager = pluginManager;
+        	super(pluginManager);
+        	this.pluginManager = pluginManager;
         }
 
         protected void setApplicationContext(ApplicationContext applicationContext) {
-            this.applicationContext = applicationContext;
+        	this.applicationContext = applicationContext;
         }
 
         @Override
         public Object create(Class<?> extensionClass) {
-            Object extension = createWithoutSpring(extensionClass);
-            if (extension != null) {
-                PluginWrapper pluginWrapper = pluginManager.whichPlugin(extensionClass);
-                if (pluginWrapper != null) {
+        	Object extension = createWithoutSpring(extensionClass);
+        	if (extension != null) {
+        		PluginWrapper pluginWrapper = pluginManager.whichPlugin(extensionClass);
+        		if (pluginWrapper != null) {
                 applicationContext.getAutowireCapableBeanFactory().autowireBean(extension);
-                }
-            }
-            return extension;
+        		}
+        	}
+        	return extension;
         }
 
     }
 ```
 
-2. JAR파일 지원
+  2. JAR File Support
 
-* 기존 PF4J는 컴파일된 폴더 파일 형식만 읽도록 되어 있었다. nGrinder에서는 개발의 편의성을 위하여 JAR파일을 읽을수 있도록 개선 하였다.
-  
-PF4J의 AbstractExtensionFinder를 상속받아 NGrinderDefaultExtensionFinder에서 구현 하였으며, readPluginsStorages()에서 
-findResource를 찾을때에는 @Extension 어노테이션을 주어 생성해 놓은 "META-INF/extensions.idx" 파일을 참조 하였다.
+* Existing PF4J is supposed to read only compiled folder file format. We have made improvements to read JAR files for ease of development.
 
 ```java
       NGrinderServiceProviderExtensionFinder
@@ -306,9 +301,9 @@ findResource를 찾을때에는 @Extension 어노테이션을 주어 생성해 �
             ....
 ```
 
-마치며..
+Finally..
 ======
 
-  - 기존 Atlassian Plugin Framework(APF)를 사용할 때에는 atlas-package 라는 별도의 빌드 방식으로 comfile을 해야하는 어려움이 있었지만, PF4J는 기존 maven빌드 방식 그대로 사용이 가능 하다.
-  - APF에서 PF4J로 변경 하여 약 4000KB resource를 80KB로 감량 할수 있었다.
-  - 많은 사용자분들이 PF4J를 활용하여, 필요에 맞춰 자유로운 Plugin을 개발 하였으면 한다.
+  - When using the old Atlassian Plugin Framework (APF), there was a difficulty in creating a comfile with a separate build method called atlas-package, PF4J can be used in the existing maven build method.
+  - We changed from APF to PF4J, and we were able to reduce about 4000KB of resources to 80KB.
+  - We want many users to develop plugin freely using PF4J.

@@ -1,9 +1,6 @@
 * This document is subject to be changed for ngrinder 3.4.
 
-TBD
-
-
-The following describes the plugin structure in nGrinder. nGrinder uses the [Atlanssian Plugin Framwork](https://developer.atlassian.com/display/PLUGINFRAMEWORK/Plugin+Framework) to customize nGrinder behavior without modifying nGrinder core code. nGrinder supports the following plugin extension points.
+The following describes the plugin structure in nGrinder. nGrinder uses the [Plugin Framework for Java (PF4J)](https://github.com/pf4j/pf4j) to customize nGrinder behavior without modifying nGrinder core code. nGrinder supports the following plugin extension points.
 
 |Extension Interface|Extension Point Name(Plugin-Key)|Description|
 |-------------------|--------------------------------|-----------|
@@ -14,20 +11,3 @@ The following describes the plugin structure in nGrinder. nGrinder uses the [Atl
 |[OnTestLifeCycleRunnable](https://github.com/naver/ngrinder/blob/develop/ngrinder-core/src/main/java/org/ngrinder/extension/OnTestLifeCycleRunnable.java)|on-test-start|This is the plugin extension point to invoke your logic when the test is executed and stopped.|
 |[OnServletFilter](https://github.com/naver/ngrinder/blob/develop/ngrinder-core/src/main/java/org/ngrinder/extension/OnServletFilter.java)|on-servletfilter|This is only one interface which ngrinder itself does not define. You should import as a servlet dependency in the plugin’s pom.xml to extend this interface.<div>&lt;!-- Servlet --&gt;<br>&lt;dependency&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;javax.servlet&lt;/groupId&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;servlet-api&lt;/artifactId&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.5&lt;/version&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;scope&gt;provided&lt;/scope&gt;<br>&lt;/dependency&gt;</div>The plugin will be located in the servlet filter chain. Therefore if you need to intercept the HTTPRequest or HTTPResponse to modify the WAS level behavior, you should implement this plugin. The sample implementation can be found [here](https://github.com/naver/ngrinder-siteminder-sso/blob/master/src/main/java/org/ngrinder/sso/SiteMinderLogoutFilter.java).|
 |[OnPreAuthServletFilter](https://github.com/naver/ngrinder/blob/develop/ngrinder-core/src/main/java/org/ngrinder/extension/OnPreAuthServletFilter.java)|on-preauth-servletfilter|This is the same extension point as on-servletfilter but it’s located before pre-auth by spring security is executed. The most common usage of this extension point is to allow SSO(such as SiteMinder) which is already processed by web servers like apache httpd. The sample implementation can be found [here](https://github.com/naver/ngrinder-siteminder-sso/blob/master/src/main/java/org/ngrinder/sso/SiteMinderFilter.java).|
-
-
-- Copy the sample plugin from existing network overflow plugin
-    - https://github.com/nhnopensource/ngrinder-networkoverflow
-- Open pom.xml and modify groupId, artifiactId, and name for yours.
-```
-<groupId>place any plugin group id</groupId>
-<artifactId>place any plugin artifact id</artifactId>
-<version>place your plugin version number</version>
-<name>place any prefered name</name>
-```
-
-- Import the plugin into eclipse or any your prefered IDE.
-    - Ex) maven eclipse:eclipse
-- Implement the plugin logic using above interfaces.
-- Copy this to ${NGRINDER_HOME}/plugins folder.
-- That's it.
