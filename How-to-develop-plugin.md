@@ -205,6 +205,7 @@ The [Plugin Framework for Java (PF4J)](https://github.com/pf4j/pf4j), which is e
         }
         ......
         ```
+
         ```java
         @Component
         public class NGrinderSpringExtensionFactory extends SpringExtensionFactory {
