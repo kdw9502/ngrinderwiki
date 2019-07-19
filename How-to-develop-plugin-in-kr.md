@@ -40,7 +40,7 @@ opensource인 nGrinder는 외부 개발자도 참여 가능하도록 Atlassian P
 
 ## 개발 방법
 1. nGrinder는 사용자들이 필요에 맞춰 자유로운 Plugin을 개발할 수 있도록 아래와 같은 확장 포인터들을 제공하고 있다.
- https://github.com/naver/ngrinder/wiki/How-to-develop-plugin-extension-points
+ https://github.com/naver/ngrinder/wiki/Plugin-extension-points
 
 2. pom.xml 설정
     * nGrinder repository를 pom.xml에 추가해준다.

@@ -42,7 +42,7 @@ The [Plugin Framework for Java (PF4J)](https://github.com/pf4j/pf4j), which is e
 ## How to Use
 
 1. nGrinder provides the following extension points.
- https://github.com/naver/ngrinder/wiki/How-to-develop-plugin-extension-points
+ https://github.com/naver/ngrinder/wiki/Plugin-extension-points
 
 2. pom.xml setting
     * Add nGrinder repository to pom.xml.
