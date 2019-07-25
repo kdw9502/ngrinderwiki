@@ -1,6 +1,4 @@
-* This document is subject to be changed for ngrinder 3.4.
-
-The following describes the plugin structure in nGrinder. nGrinder uses the [Plugin Framework for Java (PF4J)](https://github.com/pf4j/pf4j) to customize nGrinder behavior without modifying nGrinder core code. nGrinder supports the following plugin extension points.
+The following describes the plugin structure in nGrinder. From 3.4, nGrinder uses the [Plugin Framework for Java (PF4J)](https://github.com/pf4j/pf4j) to customize nGrinder behavior without modifying nGrinder core code. nGrinder supports the following plugin extension points.
 
 |Extension Interface|Extension Point Name(Plugin-Key)|Description|
 |-------------------|--------------------------------|-----------|
