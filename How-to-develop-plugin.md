@@ -3,8 +3,7 @@
 >It requires Spring and Java. Explicit build support is provided for Maven.
 
 ## Introduction
-nGrinder, an opensource, had provided Atlassian Plugin Framework (APF) to enable external developers to participate, but it was not that easy to develop.
-The [Plugin Framework for Java (PF4J)](https://github.com/pf4j/pf4j), which is easy to use, has been adopted from nGrinder 3.4.
+nGrinder, an opensource, had used Atlassian Plugin Framework (APF) to enable external developers to participate, but it was not that easy to develop on top of it. Therefore, [Plugin Framework for Java (PF4J)](https://github.com/pf4j/pf4j), which is easy to use, has been adopted from nGrinder 3.4.
 
 * About PF4J : https://github.com/decebals/pf4j
 * PF4J-UPDATE : https://github.com/decebals/pf4j-update
