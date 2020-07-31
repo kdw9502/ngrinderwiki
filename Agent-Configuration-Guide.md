@@ -67,7 +67,7 @@ nGrinder agent’s run_agent.sh commands takes several parameters to override th
 |-ah / –agent-home|-ah ~/.ngrinder-agent1|ngrinder.agent.home|agent home path. By default it’s the ~/.ngrinder_agent|
 |-ch / --controller-host|-ch 10.10.10.10|agent.controller_host|the controller host name or IP to which this agent is connect.  If it’s not specified, ${NGRINDER_AGENT_ HOME}/agent.conf’s agent.controller_host value is used.|
 |-cp / --controller-port|-cp 10023|agent.controller_port|the controller port number.  If it’s not specified, ${NGRINDER_AGENT_ HOME}/agent.conf’s agent.controller_port value is used.|
-|-r / --region|-r region_owned_myid|agent.region|the controller’s region name. If it should be private agent, it should be {region_name}_owed_{userid}. If it’s the controller is not cluster mode, you can omiit {region_name}.|
+|-r / --region|-r region_owned_myid|agent.region|the controller’s region name. If it should be private agent, it should be {region_name}_owned_{userid}. If it’s the controller is not cluster mode, you can omiit {region_name}.|
 |-hi / --host-id|-hi my_agent_1|agent.host_id|the agent host id. If not provided, host name is automatically selected.|
 |-s / --silent|-s|common.silent_mode|Make the agent output have only very important messages.|
 |-v / --version|-v| |Show the agent’s version number and exit.|
@@ -86,7 +86,7 @@ When an agent starts up, it copied controller providing configurations into the 
 |common.silent_mode|false|-|Set true to make the agent log have only very important messages|
 |agent.controller_host|localhost|agent.controller.ip, agent.console.ip, agent.controller_ip|the controller host name or IP to which this agent is connect.|
 |agent.controller_port|16001|agent.controller.port, agent.console.port|the controller port number.|
-|agent.region|-| |the controller’s region name. If it should be private agent, it should be {region_name}_owed_{userid}. If it’s the controller is not cluster mode, you can omiit {region_name}.|
+|agent.region|-| |the controller’s region name. If it should be private agent, it should be {region_name}_owned_{userid}. If it’s the controller is not cluster mode, you can omiit {region_name}.|
 |agent.host_id|localhost’s hostname|agent.hostid|the agent host id. If not provided, host name is automatically selected.|
 |agent.server_mode|true| |false if you want to remove –server vm option in agent’s process run.|
 |agent.all_logs|false|agent.send.all.logs|true if you want to send the all agent’s processes log to controller when tests is finished. By default, it sends only one process’s log to avoid useless duplicated info.|
