@@ -1,3 +1,6 @@
+### Install
+See https://github.com/naver/ngrinder/wiki/Installation-Guide
+
 ### Login
 A user can get the nGrinder URL and log in with an id provided by your nGrinder administrator.  
 If it is the first access to nGrinder after installation, You can login with admin(id) / admin(password).
