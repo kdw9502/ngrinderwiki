@@ -97,15 +97,15 @@ See Private Agent for details.
    1. Check the ~/.ngrinder_agent folder and see the configuration(agent.conf) is there
    2. If it does not exist, copy the current folder’s \_\_agent.conf file into ~/.ngrinder_agent/agent.conf and load it.
    3. If it exists, just run with existing configuration in ~/.ngrinder_agent/agent.conf.
-5. If you like to overwrite the existing configuration with the latest configuration, please put ‘-o‘ option as a parameter  
+5. If you run the agent, latest configuration overwrites the existing configuration by default.
    ```
-   run_agent.sh -o # for linux / mac
+   run_agent.sh # for linux / mac
 
-   run_agent_bg.sh -o # If you want to run it in the background for linux / mac
+   run_agent_bg.sh # If you want to run it in the background for linux / mac
    ```
    or
    ```
-   run_agent.bat –o # for windows
+   run_agent.bat # for windows
    ```
 6. If you want to stop the agent.  
    ```
