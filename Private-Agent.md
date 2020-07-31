@@ -10,8 +10,7 @@ If you're running over nGrinder 3.3 and log in as a not admin account, you will 
 
 This downloaded private agent already contains the configuration which the agent acts as private agent. Therefore all you need to do is just to run
 ```
-# -o option make the configuration(__agent.conf) overwrite the existing configuration.
-run_agent.sh -o
+run_agent.sh
 ```
 If you’re using nGrinder 3.2.X version, you need to set up the configuration by youself. The following describes how to set up the user own agents.
 
