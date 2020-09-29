@@ -1,8 +1,8 @@
-NGrinder supports LDAP. If LDAP configuration is enabled, users can be authenticated by LDAP.  
+nGrinder supports LDAP. If LDAP configuration is enabled, users can be authenticated by LDAP.  
 It can be used with LDAP servers like Active Directory or OpenLDAP.
 
 ## Configuration
-You can find LDAP related configurations in the `${NGRINDER_HOME}/system.conf`.
+You can find LDAP configuration in the `${NGRINDER_HOME}/system.conf`.
 > Any changes to the LDAP configuration will be affected on the fly.
 ```
 ######################################################################################
@@ -44,16 +44,19 @@ You can find LDAP related configurations in the `${NGRINDER_HOME}/system.conf`.
 ```
 
 ### Server
-Specify the name of LDAP server host name. You don't need to include the protocol `ldap://` or `ldaps://`.
+Specify the name of LDAP server host name (like `ldap.acme.org`). You don't need to include the protocol `ldap://` or `ldaps://`.
 
 
 ### Port
-If your LDAP server uses a port other than `389`, you can specify the port number.
+If your LDAP server uses a port other than `389`, you can specify the port number.  
+To connect to LDAP over SSL(LDAPS), specify the port number `636` or the port number you are using.
 
 ### Base DN
-Cause the LDAP search is performed recursively, we can start a search a sub-node, you get a better performance because it narrows down the scope of a search.
+Cause the LDAP search is performed recursively, we can start searching at a sub-node. You get a better performance because it narrows down the scope of a search.
 
 This field specifies the DN of such a subtree.
+
+If you do specify this value, the field normally looks something like `dc=acme,dc=org`
 
 ### User Search Base
 If you specify a relative DN (from the base DN) here, further narrow down searches will be performed to the sub-tree.
@@ -61,7 +64,9 @@ If you specify a relative DN (from the base DN) here, further narrow down search
 The combination of **base DN** and **user search base** is used to searh a user.
 
 ### User Search Filter
-Specify the filter that determines a user more specifically. Default value is `(objectClass=*)`.
+The LDAP search performed in nGrinder is aim to get the user information by given the user id.  
+The user search filter determines the query to be run to identify the user information.  
+Default value is `(objectClass=*)`.
 
 ### User Display Name
 Specify the attribute key that represents user display name. Default value is `displayName`.
