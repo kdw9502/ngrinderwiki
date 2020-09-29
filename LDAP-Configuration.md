@@ -1,4 +1,4 @@
-nGrinder supports LDAP login as a default plugin. If you enable this configuration, you can authenticate users using LDAP.  
+NGrinder supports LDAP. If LDAP configuration is enabled, users can be authenticated by LDAP.  
 It can be used with LDAP servers like Active Directory or OpenLDAP.
 
 ## Configuration
