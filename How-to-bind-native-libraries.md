@@ -7,7 +7,7 @@ The followings describes the step necessary to run so or dlls with nGrinder.
 1. Prepare the DLLs or SOs which defines the simple functions which can be easily bridged to Java.  
    Methods with no parameter is pefered. If you want to pass the parameter from nGrinder script to DLLs or SOs, please make the parameter type simple as much as possible like char* or int.
 2. Upload the created DLLs or SOs into lib folder. If you will define the script in the helloworld/TestRunner.groovy, you should upload those native libraries in the helloworld/lib/ folder.
-3. Write the test script using JNA binding. Following show the simple binding between the groovy script and native lib named “dmclient”
+3. Write the test script using JNA binding. Following show the simple binding between the groovy script and native lib named "native_client"
 
 ```groovy
 package org.ngrinder;
@@ -40,6 +40,8 @@ class TestRunner {
     // Define the interface which native library has.
     interface NativeClient extends Library {
         public void connect(  )
+        // String will converted to char pointer
+        public void connect(String ip, int port)    
     }
 
     public static GTest test
@@ -72,5 +74,34 @@ class TestRunner {
     }
 }
 ```
-4. Then run the test.  
+4. In Jython's case, Write the test script using ctypes binding. Following show the simple binding between the jython script and native lib named "native_client"
+```python
+from net.grinder.script.Grinder import grinder
+from net.grinder.script import Test
+import ctypes
+
+test = Test(1, "Test1")
+
+class TestRunner:
+    # initlialize a thread 
+    def __init__(self):
+        test.record(TestRunner.__call__)
+        grinder.statistics.delayReports=True
+
+    def before(self):
+        # load 'native_client.so or native_client.dll with interface NativeClient
+        # (File extension(so or dll) is depending on agent's OS)
+        # Note that path contains lib/, Unlike Groovy's case.
+        self.native_client = ctypes.cdll.LoadLibrary("lib/native_client.dll")
+        # if the method has parameters, you need to assign list of argument type
+        self.native_client.Connect.argtypes = [ctypes.c_char_p, ctypes.c_int]
+
+    # test method
+    def __call__(self):
+        self.before()
+        self.native_client.Connect("10.30.220.18", 31001)
+
+```
+
+5. Then run the test.  
    Please be aware that you should run the SOs or DLLs in the machines which contains same library version(e.x. GLIBC) when you developed those.
